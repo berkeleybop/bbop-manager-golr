@@ -32,7 +32,7 @@
         "bbop-registry": "0.0.2",
         "bbop-rest-manager": "0.0.6",
         "bbop-rest-response": "0.0.3",
-        "bbop-response-golr": "0.0.3",
+        "bbop-response-golr": "0.0.4",
         "golr-conf": "0.0.3",
         "underscore": "1.8.3"
     },

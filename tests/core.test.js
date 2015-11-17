@@ -16,13 +16,6 @@ var golr_manager = require('..');
 var golr_conf = require('golr-conf');
 var golr_response = require('bbop-response-golr');
 
-// The likely main scripting engine.
-var sync_engine = require('bbop-rest-manager').sync_request;
-// The likely main browser engine.
-var jquery_engine = require('bbop-rest-manager').jquery;
-// Everybody else engine.
-var node_engine = require('bbop-rest-manager').node;
-
 ///
 /// Helpers.
 ///
