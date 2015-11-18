@@ -35,117 +35,164 @@ var golr_url = 'http://golr.berkeleybop.org/solr/';
 /// Start unit testing.
 ///
 
-describe('bbop-manager-golr engine test', function(){
+describe('bbop-manager-golr: sync engine test', function(){
 
-    it('sync manager', function(){
+    var gconf = null;
+    var engine_to_use = null;
+    before(function(done){
+	gconf = new golr_conf.conf(amigo.data.golr);
+	engine_to_use = new sync_engine(golr_response);
+	done();
+    });
 
-	var gconf = new golr_conf.conf(amigo.data.golr);
-
-	// Create an engine (technically a lower-level manager) to
-	// make it all run.
-	var engine_to_use = new sync_engine(golr_response);
+    it('sync direct response', function(done){
+	
 	//engine_to_use.debug(true);
-	//engine_to_use.method('GET');
 	engine_to_use.method('GET');
 	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
 	
 	var r = manager.search();
-	//delete r._raw;
 	//console.log('r', r);
-
+	
 	assert.isTrue(r.paging_p(), 'paging off defult query: yes');
 	assert.isAbove(r.total_documents(), 10, 'got ten docs: yes');
+	
+	done();
     });
 
-    // it('node: async manager', function(done){
+    it('sync registered callback', function(done){
 
-    // 	var gconf = new golr_conf.conf(amigo.data.golr);
+	//engine_to_use.debug(true);
+	engine_to_use.method('GET');
+	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
+	
+	manager.register('search', function(resp, man){
+	    
+	    assert.isTrue(resp.paging_p(), 'paging off defult query: yes');
+	    assert.isAbove(resp.total_documents(), 10, 'got ten docs: yes');
 
-    // 	// 
-    // 	var engine_to_use = new node_engine(golr_response);
-    // 	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'async');
+	    done();
+	});
 
-    // 	// // 
-    // 	// manager.get_meta().then(function(r){
-    // 	//     assert.isAbove(r.relations().length, 0, 'has rels');
-    // 	//     assert.isAbove(us.keys(r.models_meta()).length, 0, 'has model meta');
-    // 	//     assert.isAbove(r.model_ids().length, 0, 'has model ids');
-    // 	//     assert.isAbove(r.evidence().length, 0, 'has ev');
-    // 	//     done();
-    // 	// }).done();
-
-    // });
+	var r = manager.search();
+	//console.log('r', r);
+    });
 });
 
-// describe('model work using jQuery', function(){
 
-//     var mock_jQuery = null;
-//     var engine_to_use = null;
-//     var manager = null;
-//     before(function(done){
-//         // Modify the manager into functioning--will need this to get
-//         // tests working for jQuery in this environment.
-//         var domino = require('domino');
-//         mock_jQuery = require('jquery')(domino.createWindow());
-//         var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-//         mock_jQuery.support.cors = true;
-//         mock_jQuery.ajaxSettings.xhr = function() {
-//             return new XMLHttpRequest();
-//         };
+describe('bbop-manager-golr: node engine test', function(){
 
-// 	// Setup a reusable engine and manager.
-// 	// We need to do some fiddling to get the jQuery manager to
-// 	// operate correctly in this land of node.
-// 	engine_to_use = new jquery_engine(golr_response);
-// 	engine_to_use.JQ = mock_jQuery;
+    var gconf = null;
+    var engine_to_use = null;
+    before(function(done){
+	gconf = new golr_conf.conf(amigo.data.golr);
+	engine_to_use = new node_engine(golr_response);
+	done();
+    });
 
-// 	// Manager init.
-// 	manager = new minerva_manager(barista_location, barista_profile,
-// 				      null, engine_to_use, 'async');
-
-// 	done();
-//     });
-
-//     it('trying the basics with a jQuery manager', function(done){
-
-// 	// 
-// 	manager.get_meta().then(function(r){
-// 	    assert.isAbove(r.relations().length, 0, 'has rels');
-// 	    assert.isAbove(us.keys(r.models_meta()).length, 0, 'has model meta');
-// 	    assert.isAbove(r.model_ids().length, 0, 'has model ids');
-// 	    assert.isAbove(r.evidence().length, 0, 'has ev');
-// 	    done();
-// 	}).done();
-
-//     });
-
-//     it('things we know about a model', function(done){
-// 	this.timeout(60000); // doing a much of things, could take a while
-
-// 	// Like there is one, and it needs at least a single
-// 	// individual to be saved right now.
-// 	manager.get_meta().then(function(r){
+    it('node direct promise', function(complete){
 	
-// 	    assert.isAbove(r.model_ids().length, 0, 'has model ids');
-// 	    var mids = r.model_ids();
-// 	    var mid = mids[0]; // any would be fine
+	// Create an engine (technically a lower-level manager) to
+	// make it all run.
+	//engine_to_use.debug(true);
+	engine_to_use.method('GET');
+	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'async');
+
+	// 
+	manager.search().then(function(r){
 	    
-// 	    return manager.get_model(mid);
+	    //console.log('r', r);
+	    
+	    assert.isTrue(r.paging_p(), 'paging off defult query: yes');
+	    assert.isAbove(r.total_documents(), 10, 'got ten docs: yes');
+    	    complete();
 
-// 	}).then(function(r){
+    	}).done();
+    });
+    
+    it('node registered callback', function(done){
 
-// 	    var data = r.data();
-// 	    var graph = new noctua_model.graph();
-// 	    graph.load_data_basic(data);
-// 	    //assert.isAbove(r.model_ids().length, 0, 'has model ids');
-// 	    //console.log(graph);
-// 	    assert.isAbove(graph.all_nodes().length, 0, 'has indivs');
-
-// 	    done();
-// 	}).done();
+    	// Create an engine (technically a lower-level manager) to
+    	// make it all run.
+    	//engine_to_use.debug(true);
+    	engine_to_use.method('GET');
+    	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'async');
 	
-//     });
-// });
+    	manager.register('search', function(resp, man){
+	    
+    	    assert.isTrue(resp.paging_p(), 'paging off defult query: yes');
+    	    assert.isAbove(resp.total_documents(), 10, 'got ten docs: yes');
 
-//     });
-// });
+    	    done();
+    	});
+
+    	var p = manager.search();
+    });
+
+});
+
+
+describe('bbop-manager-golr: jquery engine test', function(){
+
+    var mock_jQuery = null;
+    var engine_to_use = null;
+    var gconf = null;
+    before(function(done){
+        // Modify the manager into functioning--will need this to get
+        // tests working for jQuery in this environment.
+        var domino = require('domino');
+        mock_jQuery = require('jquery')(domino.createWindow());
+        var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+        mock_jQuery.support.cors = true;
+        mock_jQuery.ajaxSettings.xhr = function() {
+	    return new XMLHttpRequest();
+        };
+	
+	// Setup a reusable engine and manager.
+	// We need to do some fiddling to get the jQuery manager to
+	// operate correctly in this land of node.
+	engine_to_use = new jquery_engine(golr_response);
+	engine_to_use.JQ = mock_jQuery;
+	
+	gconf = new golr_conf.conf(amigo.data.golr);
+
+	done();
+    });
+
+    it('jQuery direct promise', function(complete){
+	
+	// Manager init.
+    	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'async');
+	
+	// 
+	
+	manager.search().then(function(r){
+
+    	    assert.isTrue(r.paging_p(), 'paging off defult query: yes');
+    	    assert.isAbove(r.total_documents(), 10, 'got ten docs: yes');
+
+	    complete();
+	}).done();
+
+    });
+
+    it('jquery registered callback', function(done){
+
+    	// Create an engine (technically a lower-level manager) to
+    	// make it all run.
+    	//engine_to_use.debug(true);
+    	engine_to_use.method('GET');
+    	var manager = new golr_manager(golr_url, gconf, engine_to_use, 'async');
+	
+    	manager.register('search', function(resp, man){
+	    
+    	    assert.isTrue(resp.paging_p(), 'paging off defult query: yes');
+    	    assert.isAbove(resp.total_documents(), 10, 'got ten docs: yes');
+
+    	    done();
+    	});
+
+    	var p = manager.search();
+    });
+
+});
