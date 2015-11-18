@@ -1,6 +1,6 @@
 {
     "name": "bbop-manager-golr",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "license": "BSD-3-Clause",
     "description": "Manager for handling communication and callbacks with GOlr instances.",
     "keywords": [
@@ -36,7 +36,7 @@
         "golr-conf": "0.0.3",
         "jquery": "2.1.4",
         "underscore": "1.8.3",
-	"xmlhttprequest": "1.7.0"
+        "xmlhttprequest": "1.7.0"
     },
     "devDependencies": {
         "chai": "^2.3.0",
