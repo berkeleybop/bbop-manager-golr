@@ -811,6 +811,43 @@ describe('bbop-manager-golr - 11', function(){
 });
 
 
+describe('bbop-manager-golr - 11b: sensible_query_p', function(){
+
+    it('nobody okay without query filter', function(){
+
+	// Setup.
+	var gconf = new golr_conf.conf(amigo.data.golr);
+	var gm = new golr_manager('http://golr.berkeleybop.org/', gconf);
+	
+	gm.set_comfy_query('fo');
+	assert.equal(gm.sensible_query_p(), false, '! sensible: "fo", no qf');
+	
+	gm.set_comfy_query('foo');
+	assert.equal(gm.sensible_query_p(), false, '! sensible: "foo", no qf');
+    });
+	
+    it('comfy around the perimeter', function(){
+
+	var gconf = new golr_conf.conf(amigo.data.golr);
+	var gm = new golr_manager('http://golr.berkeleybop.org/', gconf);
+	gm.set_personality('annotation'); // profile in gconf
+	//gm.add_query_filter('document_category', 'annotation', ['*']);
+
+	gm.set_comfy_query('fo');
+	assert.equal(gm.sensible_query_p(), false, '! sensible: "fo"');
+	
+	gm.set_comfy_query('foo');
+	assert.equal(gm.sensible_query_p(), true, 'sensible: "foo"');
+	
+	gm.set_comfy_query('');
+	assert.equal(gm.sensible_query_p(), true, 'sensible: ""');
+	
+	gm.set_comfy_query('*:*');
+	assert.equal(gm.sensible_query_p(), true, 'sensible: "*:*"');
+	
+    });
+});
+
 describe('bbop-manager-golr - 12', function(){
     it('batch', function(){
 
