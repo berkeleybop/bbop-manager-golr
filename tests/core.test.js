@@ -1758,3 +1758,89 @@ describe('25', function(){
 
     });
 });
+
+describe('playing with get_download_url', function(){
+
+    it('switch', function(){
+
+	// Setup.
+	var gconf = new golr_conf.conf(amigo.data.golr);
+	var gm = new golr_manager('http://golr.berkeleybop.org/', gconf);     
+	gm.set_personality('ontology');
+	gm.set_query('***');
+	gm.add_query_field('foo', 5.0);
+
+	var dl_url = gm.get_download_url(['foo', 'bar']);
+	assert.isTrue(_link_comp(dl_url,
+     				 ['http://golr.berkeleybop.org/select?defType=edismax',
+     				  'qt=standard',
+     				  'indent=on',
+     				  'wt=csv',
+     				  'rows=1000',
+     				  'start=0',
+     				  'fl=foo,bar',
+     				  'facet=true',
+     				  'facet.mincount=1',
+				  'facet.sort=count',
+     				  'json.nl=arrarr',
+     				  'facet.limit=25',
+				  'csv.encapsulator=',
+				  'csv.separator=%09',
+				  'csv.header=false',
+				  'csv.mv.separator=%7C',
+ 				  'facet.field=source',
+ 				  'facet.field=subset',
+ 				  'facet.field=regulates_closure_label',
+ 				  'facet.field=is_obsolete',
+     				  'q=***',
+				  'qf=annotation_class%5E3',
+				  'qf=annotation_class_label_searchable%5E5.5',
+				  'qf=description_searchable%5E1',
+				  'qf=comment_searchable%5E0.5',
+				  'qf=synonym_searchable%5E1',
+				  'qf=regulates_closure%5E1',
+				  'qf=regulates_closure_label_searchable%5E1',
+				  'qf=foo%5E5',
+				  'qf=alternate_id%5E1'].join('&'),
+     				 "download url before"));
+	
+
+	dl_url = gm.get_download_url(['foo', 'bar'], {
+	    'golr_download_url': 'http://foo.com/solr/'
+	});
+	assert.isTrue(_link_comp(dl_url,
+     				 ['http://foo.com/solr/select?defType=edismax',
+     				  'qt=standard',
+     				  'indent=on',
+     				  'wt=csv',
+     				  'rows=1000',
+     				  'start=0',
+     				  'fl=foo,bar',
+     				  'facet=true',
+     				  'facet.mincount=1',
+				  'facet.sort=count',
+     				  'json.nl=arrarr',
+     				  'facet.limit=25',
+				  'csv.encapsulator=',
+				  'csv.separator=%09',
+				  'csv.header=false',
+				  'csv.mv.separator=%7C',
+ 				  'facet.field=source',
+ 				  'facet.field=subset',
+ 				  'facet.field=regulates_closure_label',
+ 				  'facet.field=is_obsolete',
+     				  'q=***',
+				  'qf=annotation_class%5E3',
+				  'qf=annotation_class_label_searchable%5E5.5',
+				  'qf=description_searchable%5E1',
+				  'qf=comment_searchable%5E0.5',
+				  'qf=synonym_searchable%5E1',
+				  'qf=regulates_closure%5E1',
+				  'qf=regulates_closure_label_searchable%5E1',
+				  'qf=foo%5E5',
+				  'qf=alternate_id%5E1'].join('&'),
+     				 "download url after"));
+	
+    });
+});
+
