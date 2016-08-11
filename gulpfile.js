@@ -15,6 +15,7 @@ var shell = require('gulp-shell');
 var paths = {
     readme: ['./README.md'],
     tests: ['tests/*.test.js', 'tests/*.tests.js'],
+    functional_tests: ['functional-tests/*.test.js'],
     docable: ['lib/*.js', './README.md'],
     transients:['./doc/*', '!./doc/README.md']
 };
@@ -80,6 +81,19 @@ gulp.task('test', function() {
     }));
 });
 
+// TEMPORARY: Testing with mocha/chai.
+gulp.task('functional-test', function() {
+  return gulp.src(paths.functional_tests, {
+    read: false
+  }).pipe(mocha({
+    reporter: 'spec',
+    globals: {
+      // Use a different should.
+      should: require('chai').should()
+    }
+  }));
+});
+
 //gulp.task('release', ['build', 'publish-npm', 'git-commit', 'git-tag']);
 gulp.task('release', ['build', 'publish-npm']);
 
@@ -88,7 +102,7 @@ gulp.task('publish-npm', function() {
     var npm = require("npm");
     npm.load(function (er, npm) {
 	// NPM
-	npm.commands.publish();	
+	npm.commands.publish();
     });
 });
 
