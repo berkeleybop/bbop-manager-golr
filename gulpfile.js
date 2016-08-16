@@ -13,11 +13,24 @@ var del = require('del');
 var shell = require('gulp-shell');
 
 var paths = {
-    readme: ['./README.md'],
-    tests: ['tests/*.test.js', 'tests/*.tests.js'],
-    functional_tests: ['functional-tests/*.test.js'],
-    docable: ['lib/*.js', './README.md'],
-    transients:['./doc/*', '!./doc/README.md']
+    'readme': ['./README.md'],
+    'tests': ['tests/*.test.js', 'tests/*.tests.js'],
+    'docable': ['lib/*.js', './README.md'],
+    'transients':['./doc/*', '!./doc/README.md'],
+    // Heavier testing framework variables.
+    'tests-functional-data': ['tests-functional/*.test.js'],
+    'tests-functional': ['tests-functional/*.test.js'],
+    'ontologies-go': [
+	'_data/ontologies/go-gaf.owl',
+	'_data/ontologies/eco.owl',
+	'_data/ontologies/go-taxon-subsets.owl'
+    ],
+    'gafs-go': [
+	// '_data/gafs/gene_association.fb.gz',
+	// '_data/gafs/goa_human.gaf.gz'
+	'_data/gafs/test_001_p53.gaf'
+    ],
+    'metadata-go': '_data/metadata/ont-config.yaml'
 };
 
 // Browser runtime environment construction.
@@ -81,19 +94,6 @@ gulp.task('test', function() {
     }));
 });
 
-// TEMPORARY: Testing with mocha/chai.
-gulp.task('functional-test', function() {
-  return gulp.src(paths.functional_tests, {
-    read: false
-  }).pipe(mocha({
-    reporter: 'spec',
-    globals: {
-      // Use a different should.
-      should: require('chai').should()
-    }
-  }));
-});
-
 //gulp.task('release', ['build', 'publish-npm', 'git-commit', 'git-tag']);
 gulp.task('release', ['build', 'publish-npm']);
 
@@ -142,3 +142,92 @@ gulp.task('watch-test', function() {
 gulp.task('default', function() {
     console.log("'allo 'allo!");
 });
+
+///
+/// Experimental results-based testing.
+///
+
+// Local Solr settings.
+var golr_url = 'http://localhost:8080/solr/';
+var golr_load_logfile = '/tmp/golr-load.log';
+
+var owltools_max_memory = '4G';
+var owltools_runner = 'java -Xms1024M -DentityExpansionLimit=4086000 -Djava.awt.headless=true -Xmx' + owltools_max_memory + ' -jar ./java/lib/owltools-runner-all.jar';
+
+// The OWLTools options are a little harder, and variable with the
+// load we're attempting.
+// AmiGO's OWLTOOLS_USE_MERGE_IMPORT/
+var otu_mrg_imp_p = false;
+// AmiGO's OWLTOOLS_USE_REMOVE_DISJOINTS.
+var otu_rm_dis_p = false;
+var all_owltools_ops_flags_list = [
+    '--merge-support-ontologies',
+    (otu_mrg_imp_p ? '--merge-import http://purl.obolibrary.org/obo/go/extensions/go-plus.owl' : '' ),
+    '--remove-subset-entities upperlevel',
+    (otu_rm_dis_p ? '--remove-disjoints' : ''),
+    '--silence-elk --reasoner elk',
+    '--solr-taxon-subset-name amigo_grouping_subset',
+    '--solr-eco-subset-name go_groupings'
+];
+var owltools_ops_flags =
+	all_owltools_ops_flags_list.join(' ').replace(/ +/g, ' ');
+
+function _run_cmd(command_bits){
+    var final_command = command_bits.join(' ');
+    return ['echo \'' + final_command + '\'', final_command];
+}
+
+gulp.task('golr-purge', shell.task(_run_cmd(
+    [owltools_runner,
+     '--solr-url ', golr_url,
+     '--solr-purge']
+)));
+
+gulp.task('load-ontology-go', shell.task(_run_cmd(
+    [owltools_runner,
+     paths['ontologies-go'].join(' '),
+     owltools_ops_flags,
+     '--solr-url', golr_url,
+     '--solr-config', paths['metadata-go'],
+     '--solr-log', golr_load_logfile,
+     '--solr-load-ontology',
+     '--solr-load-ontology-general']
+)));
+
+gulp.task('load-gafs-go', shell.task(_run_cmd(
+    [owltools_runner,
+     paths['ontologies-go'].join(' '),
+     owltools_ops_flags,
+     '--solr-url', golr_url,
+     '--solr-log', golr_load_logfile,
+     '--solr-load-gafs', paths['gafs-go'].join(' ')]
+)));
+
+// Combined "safe" single step.
+gulp.task('load-go-safe', shell.task(_run_cmd(
+    [owltools_runner,
+     paths['ontologies-go'].join(' '),
+     owltools_ops_flags,
+     //'--ontology-pre-check', // are local, no need to check
+     '--solr-url', golr_url,
+     '--solr-config', paths['metadata-go'],
+     '--solr-log', golr_load_logfile,
+     '--solr-purge',
+     //'--solr-load-ontology',
+     //'--solr-load-ontology-general'
+     '--solr-load-gafs', paths['gafs-go'].join(' ')]
+)));
+
+// TEMPORARY: Testing with mocha/chai.
+gulp.task('test-functional', function() {
+    return gulp.src(paths['tests-functional'], {
+	read: false
+    }).pipe(mocha({
+	reporter: 'spec',
+	globals: {
+	    // Use a different should.
+	    should: require('chai').should()
+	}
+    }));
+});
+
