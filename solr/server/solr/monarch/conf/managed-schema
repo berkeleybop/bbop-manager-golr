@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Solr managed schema - automatically generated - DO NOT EDIT -->
+<schema name="golr" version="3.6">
+  <uniqueKey>id</uniqueKey>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="integer" class="solr.TrieIntField" positionIncrementGap="0" sortMissingLast="true" precisionStep="0"/>
+  <fieldType name="long" class="solr.TrieLongField"/>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="tdates" class="solr.TrieDateField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="6"/>
+  <fieldType name="tdoubles" class="solr.TrieDoubleField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="8"/>
+  <fieldType name="text_searchable" class="solr.TextField" positionIncrementGap="100" sortMissingLast="true">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="tlongs" class="solr.TrieLongField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="8"/>
+  <fieldType name="uuid" class="solr.UUIDField" indexed="true"/>
+  <field name="_version_" type="long" multiValued="false" indexed="true" stored="true"/>
+  <field name="assigned_by" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="citation" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="date" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="document_category" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="evidence" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="evidence_graph" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="evidence_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_object" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_object_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_object_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="evidence_object_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="evidence_object_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+  <field name="is_defined_by" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="is_redundant_for" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_category" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_category_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_chromosome" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_chromosome_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_chromosome_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_chromosome_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_chromosome_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_chromosome_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_chromosome_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_class_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_class_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_class_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_class_secondary_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_class_secondary_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_class_secondary_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_class_secondary_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_extension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_extension_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_extension_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_extension_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_extension_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_extension_json" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_extension_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_extension_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_gene" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_gene_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_gene_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_gene_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_gene_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_gene_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_gene_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_isoform" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_taxon" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_taxon_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_taxon_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_taxon_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="object_taxon_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="object_taxon_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="object_taxon_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="qualifier" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="relation" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="relation_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="relation_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="relation_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="relation_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="source" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="source_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="source_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="source_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="source_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="source_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="source_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_category" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_category_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_chromosome" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_chromosome_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_chromosome_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_chromosome_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_chromosome_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="subject_chromosome_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_chromosome_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="subject_description" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_description_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_family" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_family_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_family_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_family_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_gene" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_gene_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_gene_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_gene_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_gene_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="subject_gene_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_gene_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_ortholog_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_synonym" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_taxon" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_taxon_closure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_taxon_closure_label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_taxon_closure_label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="subject_taxon_closure_map" type="string" multiValued="false" indexed="false" required="false" stored="true"/>
+  <field name="subject_taxon_label" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="subject_taxon_label_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <copyField source="object_chromosome_closure_label" dest="object_chromosome_closure_label_searchable"/>
+  <copyField source="object_chromosome_label" dest="object_chromosome_label_searchable"/>
+  <copyField source="object_class_secondary_closure_label" dest="object_class_secondary_closure_label_searchable"/>
+  <copyField source="object_closure_label" dest="object_closure_label_searchable"/>
+  <copyField source="object_extension_closure_label" dest="object_extension_closure_label_searchable"/>
+  <copyField source="object_extension_label" dest="object_extension_label_searchable"/>
+  <copyField source="object_gene_closure_label" dest="object_gene_closure_label_searchable"/>
+  <copyField source="object_gene_label" dest="object_gene_label_searchable"/>
+  <copyField source="object_label" dest="object_label_searchable"/>
+  <copyField source="object_taxon_closure_label" dest="object_taxon_closure_label_searchable"/>
+  <copyField source="object_taxon_label" dest="object_taxon_label_searchable"/>
+  <copyField source="source_closure_label" dest="source_closure_label_searchable"/>
+  <copyField source="source_label" dest="source_label_searchable"/>
+  <copyField source="subject_chromosome_closure_label" dest="subject_chromosome_closure_label_searchable"/>
+  <copyField source="subject_chromosome_label" dest="subject_chromosome_label_searchable"/>
+  <copyField source="subject_closure_label" dest="subject_closure_label_searchable"/>
+  <copyField source="subject_description" dest="subject_description_searchable"/>
+  <copyField source="subject_family" dest="subject_family_searchable"/>
+  <copyField source="subject_family_label" dest="subject_family_label_searchable"/>
+  <copyField source="subject_gene_closure_label" dest="subject_gene_closure_label_searchable"/>
+  <copyField source="subject_gene_label" dest="subject_gene_label_searchable"/>
+  <copyField source="subject_label" dest="subject_label_searchable"/>
+  <copyField source="subject_taxon_closure_label" dest="subject_taxon_closure_label_searchable"/>
+  <copyField source="subject_taxon_label" dest="subject_taxon_label_searchable"/>
+</schema>

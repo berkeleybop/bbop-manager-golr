@@ -28,9 +28,9 @@ var node_engine = require('bbop-rest-manager').node;
 ///
 
 var each = us.each;
-var golr_url = 'http://localhost:8983/solr/amigo';
+var golr_url = 'http://localhost:8983/solr/amigo/';
 
-describe('Hola amigo', function() {
+describe('Functional tests for Amigo', function() {
 
   var gconf = null;
   var engine_to_use = null;
@@ -40,14 +40,39 @@ describe('Hola amigo', function() {
     done();
   });
 
-  it('issue #xxx', function(done) {
+  it('issue p53', function(done) {
 
     //engine_to_use.debug(true);
     engine_to_use.method('GET');
     var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
+    manager.set_query("p53");
+    manager.add_query_field("entity_label_searchable");
 
     var r = manager.search();
-    console.log('r', r);
+
+    var docs = r.documents();
+    assert.isAbove(docs.length, 1, 'got a least 1 doc: yes');
+    assert.equal(docs[0].entity_label, 'p53', 'first result must be `p53`');
+
+    //assert.isTrue(r.paging_p(), 'paging off defult query: yes');
+    //assert.isAbove(r.total_documents(), 10, 'got ten docs: yes');
+
+    done();
+  });
+
+  it('issue neurogenesis', function(done) {
+
+    //engine_to_use.debug(true);
+    engine_to_use.method('GET');
+    var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
+    manager.set_query("neurogenesis");
+    manager.add_query_field("entity_label_searchable");
+
+    var r = manager.search();
+
+    var docs = r.documents();
+    assert.isAbove(docs.length, 1, 'got a least 1 doc: yes');
+    assert.equal(docs[0].entity_label, 'neurogenesis', 'first result must be `neurogenesis`');
 
     //assert.isTrue(r.paging_p(), 'paging off defult query: yes');
     //assert.isAbove(r.total_documents(), 10, 'got ten docs: yes');

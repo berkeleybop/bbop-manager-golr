@@ -1,5 +1,4 @@
-###
-### My stuff.
+###### My stuff.
 ###
 
 ## Do not make earlier mistakes with documentation.
@@ -60,3 +59,6 @@ build/Release
 # # Dependency directory
 # # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 # node_modules
+
+# Solr data
+solr/server/solr/*/data/
