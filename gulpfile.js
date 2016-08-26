@@ -12,6 +12,8 @@ var bump = require('gulp-bump');
 var del = require('del');
 var shell = require('gulp-shell');
 var runSequence = require('run-sequence');
+var untar = require('gulp-untar');
+var gunzip = require('gulp-gunzip');
 
 var paths = {
   'readme': ['./README.md'],
@@ -160,6 +162,7 @@ gulp.task('default', function() {
 ///
 
 // Local Solr settings.
+var monarch_url = 'http://localhost:8983/solr/monarch';
 var golr_url = 'http://localhost:8983/solr/amigo';
 var golr_load_logfile = '/tmp/golr-load.log';
 
@@ -240,6 +243,9 @@ gulp.task('test-functional', function(callback) {
     'start-solr',
     'load-go-safe',
     'load-ontology-go',
+    'monarch-purge',
+    'extract-monarch-data',
+    'load-monarch',
     'test-functional-run-test-only',
     'stop-solr',
     function(error) {
@@ -275,3 +281,25 @@ gulp.task('stop-solr',
   shell.task(_run_cmd(
     ['solr/bin/solr stop']
   )));
+
+// purge Monarch core
+gulp.task('monarch-purge', shell.task(_run_cmd(
+  [owltools_runner,
+    '--solr-url ', monarch_url,
+    '--solr-purge'
+  ]
+)));
+
+// load Monarch core
+gulp.task('load-monarch', shell.task(_run_cmd(
+  ['solr/bin/post -c monarch _data/monarch/monarch-data/_data/monarch/*.json']
+)));
+
+// extract Monarch data
+// TODO it extracts to a weird path
+gulp.task('extract-monarch-data', function () {
+    return gulp.src('./_data/monarch/*.tar.gz')
+      .pipe(gunzip())
+      .pipe(untar())
+      .pipe(gulp.dest('./_data/monarch/monarch-data'))
+  })

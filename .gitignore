@@ -62,3 +62,6 @@ build/Release
 
 # Solr data
 solr/server/solr/*/data/
+
+# Uncompressed Monarch data
+_data/monarch/monarch-data
