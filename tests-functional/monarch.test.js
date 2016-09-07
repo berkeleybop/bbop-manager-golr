@@ -47,13 +47,13 @@ describe('Functional tests for Monarch', function() {
     engine_to_use.method('GET');
     var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
     manager.set_query("charcot marie");
-    manager.add_query_field("object_label_searchable");
+    manager.add_query_field("label_searchable");
 
     var r = manager.search();
 
     var docs = r.documents();
     assert.isAbove(docs.length, 1, 'got a least 1 doc: yes');
-    assert.include(docs[0].object_label, 'Charcot-Marie', 'first result must have `Charcot-Marie`');
+    assert.include(docs[0].label[0], 'Charcot-Marie', 'first result must have `Charcot-Marie`');
 
     done();
   });
@@ -65,13 +65,13 @@ describe('Functional tests for Monarch', function() {
     engine_to_use.method('GET');
     var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
     manager.set_query("marie charcot");
-    manager.add_query_field("object_label_searchable");
+    manager.add_query_field("label_searchable");
 
     var r = manager.search();
     var docs = r.documents();
 
     assert.isAbove(docs.length, 1, 'got a least 1 doc: yes');
-    assert.include(docs[0].object_label, 'Charcot-Marie', 'first result must have `Charcot-Marie`');
+    assert.include(docs[0].label[0], 'Charcot-Marie', 'first result must have `Charcot-Marie`');
 
     done();
   });

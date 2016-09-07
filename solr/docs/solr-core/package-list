@@ -5,6 +5,9 @@ org.apache.solr.cloud
 org.apache.solr.cloud.overseer
 org.apache.solr.cloud.rule
 org.apache.solr.core
+org.apache.solr.core.backup
+org.apache.solr.core.backup.repository
+org.apache.solr.core.snapshots
 org.apache.solr.handler
 org.apache.solr.handler.admin
 org.apache.solr.handler.component

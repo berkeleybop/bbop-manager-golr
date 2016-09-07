@@ -88,7 +88,7 @@
 
     }
 
-    var newerRegex = new RegExp("^(?:v6\\\\.1\\\\.0|v6\\\\.0\\\\.1)");
+    var newerRegex = new RegExp("^(?:v6\\\\.2\\\\.0|v6\\\\.1\\\\.0)");
     function isOlder(listId) {
       return ! newerRegex.test(listId);
     }
@@ -117,8 +117,8 @@
          * the first two releases, or the current URL has a fragment and the
          * fragment refers to the current item or one of its ancestors.
          */
-        if (list.id != 'v6.1.0.list' 
-            && list.id != 'v6.0.1.list'
+        if (list.id != 'v6.2.0.list' 
+            && list.id != 'v6.1.0.list'
             && list.className != 'bulleted-list'
             && (currentAnchor == ''
                 || ! shouldExpand(currentList, currentAnchor, list.id))) {
@@ -141,7 +141,7 @@
       for (var i = 0 ; i < anchors.length; i++) {
         var anchor = anchors[i];
         if (anchor.id != '') {
-          if (anchor.id == 'v6.1.0' || anchor.id == 'v6.0.1') {
+          if (anchor.id == 'v6.2.0' || anchor.id == 'v6.1.0') {
             anchor.title = 'Click to collapse';
           } else {
             anchor.title = 'Click to expand';
@@ -185,20 +185,266 @@ In this release, there is an example Solr server including a bundled
 servlet container in the directory named "example".
 See the Quick Start guide at <a href="http://lucene.apache.org/solr/quickstart.html">http://lucene.apache.org/solr/quickstart.html</a>
 </p>
-<h2><a id="v6.1.0" href="javascript:toggleList('v6.1.0')">Release 6.1.0 </a></h2>
-<ul id="v6.1.0.list">
-      <li>Upgrading from Solr any prior release
-<ul class="bulleted-list">
-<li class="bulleted-list">
----------------------
+<h2><a id="v6.2.0" href="javascript:toggleList('v6.2.0')">Release 6.2.0 </a></h2>
+<ul id="v6.2.0.list">
+  <li><a id="v6.2.0.versions_of_major_components" href="javascript:toggleList('v6.2.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
+    <ol id="v6.2.0.versions_of_major_components.list">
+      <li>Apache Tika 1.13
 </li>
-</ul>
+      <li>Carrot2 3.12.0
 </li>
-      <li>* If you use historical dates, specifically on or before the year 1582, you should re-index.
+      <li>Velocity 1.7 and Velocity Tools 2.0
 </li>
+      <li>Apache UIMA 2.3.1
+</li>
+      <li>Apache ZooKeeper 3.4.6
+</li>
+      <li>Jetty 9.3.8.v20160314
+</li>
+    </ol>
   </li>
   <h3>Detailed Change List</h3>
-  <li><a id="v6.1.0.new_features" href="javascript:toggleList('v6.1.0.new_features')">New Features</a>&nbsp;&nbsp;&nbsp;(32)
+  <li><a id="v6.2.0.new_features" href="javascript:toggleList('v6.2.0.new_features')">New Features</a>&nbsp;&nbsp;&nbsp;(20)
+    <ol id="v6.2.0.new_features.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9187">SOLR-9187</a>: Support dates and booleans in /export handler, support boolean DocValues fields
+<br /><span class="attrib">(Erick Erickson)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8048">SOLR-8048</a>: bin/solr script should support basic auth credentials provided in solr.in.sh
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-7374">SOLR-7374</a>: Core level Backup/Restore now supports specifying the directory implementation to use
+via the "repository" parameter.
+<br /><span class="attrib">(Hrishikesh Gadre, Varun Thacker, Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9216">SOLR-9216</a>: Support collection.configName in MODIFYCOLLECTION request
+<br /><span class="attrib">(Keith Laban, noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9251">SOLR-9251</a>: Support for a new tag 'role' in replica placement rules
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9194">SOLR-9194</a>: Enhance the bin/solr script to perform file operations to/from Zookeeper
+<br /><span class="attrib">(Erick Erickson, janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9242">SOLR-9242</a>: Collection Backup/Restore now supports specifying the directory implementation to use
+via the "repository" parameter.
+<br /><span class="attrib">(Hrishikesh Gadre, Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9193">SOLR-9193</a>: Add scoreNodes Streaming Expression
+<br /><span class="attrib">(Joel Bernstein)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9243">SOLR-9243</a>: Add terms.list parameter to the TermsComponent to fetch the docFreq for a list of terms
+<br /><span class="attrib">(Joel Bernstein)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9270">SOLR-9270</a>: Allow spatialContextFactory to be simply "JTS". And if any spatial params include the old
+Spatial4j package "com.spatial4j.core" it is rewritten to "org.locationtech.spatial4j" with a warning.
+<br /><span class="attrib">(David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9090">SOLR-9090</a>: Add directUpdatesToLeadersOnly flag to solrj CloudSolrClient.
+<br /><span class="attrib">(Marvin Justice, Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9240">SOLR-9240</a>: Support parallel ETL with the topic expression
+<br /><span class="attrib">(Joel Bernstein)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9275">SOLR-9275</a>: XML QueryParser support (defType=xmlparser) now extensible via configuration.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9038">SOLR-9038</a>: Solr core snapshots: The current commit can be snapshotted which retains the commit and associates it with
+a name.  The core admin API can create snapshots, list them, and delete them. Snapshot names can be referenced in
+doing a core backup, and in replication.  Snapshot metadata is stored in a new snapshot_metadata/ dir.
+<br /><span class="attrib">(Hrishikesh Gadre via David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9279">SOLR-9279</a>: New boolean comparison function queries comparing numeric arguments: gt, gte, lt, lte, eq
+<br /><span class="attrib">(Doug Turnbull, David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9200">SOLR-9200</a>: Add Delegation Token Support to Solr.
+<br /><span class="attrib">(Gregory Chanan)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9252">SOLR-9252</a>: Feature selection and logistic regression on text
+<br /><span class="attrib">(Cao Manh Dat, Joel Bernstein)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-6465">SOLR-6465</a>: CDCR: fall back to whole-index replication when tlogs are insufficient.
+<br /><span class="attrib">(Noble Paul, Renaud Delbru, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9320">SOLR-9320</a>: A REPLACENODE command to decommission an existing node with another new node
+<br /><span class="attrib">(noble, Nitin Sharma, Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9318">SOLR-9318</a>: A DELETENODE command to delete all replicas in that node
+<br /><span class="attrib">(noble, Nitin Sharma, Varun Thacker)</span></li>
+    </ol>
+  </li>
+  <li><a id="v6.2.0.bug_fixes" href="javascript:toggleList('v6.2.0.bug_fixes')">Bug Fixes</a>&nbsp;&nbsp;&nbsp;(41)
+    <ol id="v6.2.0.bug_fixes.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9191">SOLR-9191</a>: OverseerTaskQueue.peekTopN() fatally flawed
+<br /><span class="attrib">(Scott Blum, Noble Paul)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9199">SOLR-9199</a>: ZkController#publishAndWaitForDownStates logic is inefficient
+<br /><span class="attrib">(Hrishikesh Gadre)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9161">SOLR-9161</a>: Change SolrPluginUtils.invokeSetters implementation to accommodate setter variants.
+<br /><span class="attrib">(Christine Poerschke, Steve Rowe, Uwe Schindler)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9234">SOLR-9234</a>: srcField parameter works only when all fields are captured in the /update/json/docs
+endpoint
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8546">SOLR-8546</a>: <a href="http://issues.apache.org/jira/browse/SOLR-8546">SOLR-8546</a>: TestLazyCores is failing a lot on the Jenkins cluster.
+<br /><span class="attrib">(Erick Erickson)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9237">SOLR-9237</a>: DefaultSolrHighlighter.doHighlightingByFastVectorHighlighter can't be overidden
+<br /><span class="attrib">(janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8626">SOLR-8626</a>: 404 error when clicking nodes in cloud graph view in angular UI.
+<br /><span class="attrib">(janhoy, Trey Grainger via shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8777">SOLR-8777</a>: Duplicate Solr process can cripple a running process.
+<br /><span class="attrib">(Jessica Cheng Mallet, Scott Blum, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9254">SOLR-9254</a>: GraphTermsQueryQParserPlugin throws NPE when field being searched is not present in segment
+<br /><span class="attrib">(Joel Bernstein)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8657">SOLR-8657</a>: Fix SolrRequestInfo error logs if QuerySenderListener is being used
+<br /><span class="attrib">(Pascal Chollet,
+Tomás Fernández Löbbe)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9246">SOLR-9246</a>: If the JDBCStream sees an unknown column type it will now throw a detailed exception.
+<br /><span class="attrib">(Dennis Gove)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9181">SOLR-9181</a>: Fix some races in CollectionStateWatcher API
+<br /><span class="attrib">(Alan Woodward, Scott
+Blum)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9235">SOLR-9235</a>: Fixed NPE when using non-numeric range query in deleteByQuery
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9088">SOLR-9088</a>: Fixed TestManagedSchemaAPI failures which exposed race conditions in the schema API
+<br /><span class="attrib">( Varun Thacker, noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9207">SOLR-9207</a>: PeerSync recovery failes if number of updates requested is high. A new useRangeVersions config option
+is introduced (defaults to true) to send version ranges instead of individual versions for peer sync.
+<br /><span class="attrib">(Pushkar Raste, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8858">SOLR-8858</a>: SolrIndexSearcher#doc() completely ignores field filters unless lazy field loading is enabled.
+<br /><span class="attrib">(Caleb Rackliffe, David Smiley, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9236">SOLR-9236</a>: AutoAddReplicas will append an extra /tlog to the update log location on replica failover.
+<br /><span class="attrib">(Eungsop Yoo, Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9291">SOLR-9291</a>: ZkSolrResourceLoader should not retry fetching resources if the server has been shutdown.
+<br /><span class="attrib">(shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9287">SOLR-9287</a>: Including 'score' in the 'fl' param when doing an RTG no longer causes an NPE
+<br /><span class="attrib">(hossman, Ishan Chattopadhyaya)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9290">SOLR-9290</a>: TCP-connections in CLOSE_WAIT spike during heavy indexing and do not decrease.
+<br /><span class="attrib">(Mads Tomasgård Bjørgan, Anshum Gupta, Shai Erera, hossman, Mark Miller, yonik, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-7280">SOLR-7280</a>: In cloud-mode sort the cores smartly before loading &amp; limit threads to improve cluster stability
+<br /><span class="attrib">(noble, Erick Erickson, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9285">SOLR-9285</a>: Fixed AIOOBE when using ValueSourceAugmenter in single node RTG
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9288">SOLR-9288</a>: Fix [docid] transformer to return -1 when used in RTG with uncommitted doc
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9309">SOLR-9309</a>: Fix SolrCloud RTG response structure when multi ids requested but only 1 found
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9334">SOLR-9334</a>: CloudSolrClient.collectionStateCache is unbounded
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9339">SOLR-9339</a>: NPE in CloudSolrClient when the response is null
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8596">SOLR-8596</a>: Web UI doesn't correctly generate queries which include local parameters
+<br /><span class="attrib">(Alexandre Rafalovitch, janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8645">SOLR-8645</a>: managed-schema is now syntax highlighted in cloud-&gt;Tree view
+<br /><span class="attrib">(Alexandre Rafalovitch via janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8379">SOLR-8379</a>: UI Cloud-&gt;Tree view now shows .txt files correctly
+<br /><span class="attrib">(Alexandre Rafalovitch via janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9003">SOLR-9003</a>: New Admin UI's Dataimport screen now correctly displays DIH Debug output
+<br /><span class="attrib">(Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9308">SOLR-9308</a>: Fix distributed RTG to forward request params, fixes fq and non-default fl params
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9179">SOLR-9179</a>: NPE in IndexSchema using IBM JDK
+<br /><span class="attrib">(noble, Colvin Cowie)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9397">SOLR-9397</a>: Config API does not support adding caches
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9405">SOLR-9405</a>: ConcurrentModificationException in ZkStateReader.getStateWatchers.
+<br /><span class="attrib">(Alan Woodward, Edward Ribeiro, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9232">SOLR-9232</a>: Admin UI now fully implements Swap Cores interface
+<br /><span class="attrib">(Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8715">SOLR-8715</a>: Admin UI's Schema screen now works for fields with stored=false and some content indexed
+<br /><span class="attrib">(Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8911">SOLR-8911</a>: In Admin UI, enable scrolling for overflowing Versions and JVM property values
+<br /><span class="attrib">(Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9002">SOLR-9002</a>: Admin UI now correctly displays json and text files in the collection/Files screen
+<br /><span class="attrib">(Upayavira, Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8993">SOLR-8993</a>: Admin UI now correctly supports multiple DIH handler end-points
+<br /><span class="attrib">(Upayavira, Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9032">SOLR-9032</a>: Admin UI now correctly implements Create Alias command
+<br /><span class="attrib">(Upayavira, Alexandre Rafalovitch)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9391">SOLR-9391</a>: LBHttpSolrClient.request now correctly returns Rsp.server when
+previously skipped servers were successfully tried.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+    </ol>
+  </li>
+  <li><a id="v6.2.0.optimizations" href="javascript:toggleList('v6.2.0.optimizations')">Optimizations</a>&nbsp;&nbsp;&nbsp;(4)
+    <ol id="v6.2.0.optimizations.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9219">SOLR-9219</a>: Make hdfs blockcache read buffer sizes configurable and improve cache concurrency.
+<br /><span class="attrib">(Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9264">SOLR-9264</a>: Optimize ZkController.publishAndWaitForDownStates to not read all collection states and
+watch relevant collections instead.
+<br /><span class="attrib">(Hrishikesh Gadre, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9335">SOLR-9335</a>: Solr cache/search/update stats counters now use LongAdder which are supposed to have higher throughput
+under high contention.
+<br /><span class="attrib">(Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9350">SOLR-9350</a>: JSON Facets: method="stream" will no longer always uses &amp; populates the filter cache, likely
+flushing it.  'cacheDf' can be configured to set a doc frequency threshold, now defaulting to 1/16th doc count.
+Using -1 Disables use of the cache.
+<br /><span class="attrib">(David Smiley, yonik)</span></li>
+    </ol>
+  </li>
+  <li><a id="v6.2.0.other_changes" href="javascript:toggleList('v6.2.0.other_changes')">Other Changes</a>&nbsp;&nbsp;&nbsp;(23)
+    <ol id="v6.2.0.other_changes.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9195">SOLR-9195</a>: Remove unnecessary allocation and null check in UpdateRequestProcessorChain's
+getReqProcessors method.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8981">SOLR-8981</a>: Upgraded Extraction module to Apache Tika 1.13.
+<br /><span class="attrib">(Tim Allison, Lewis John McGibbney via Uwe Schindler)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9076">SOLR-9076</a>: Update to Hadoop 2.7.2
+<br /><span class="attrib">(Mark Miller, Gregory Chanan)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8787">SOLR-8787</a>: TestAuthenticationFramework should not extend TestMiniSolrCloudCluster.
+<br /><span class="attrib">(Trey Cahill via shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9180">SOLR-9180</a>: More comprehensive tests of psuedo-fields for RTG and SolrCloud requests
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-7930">SOLR-7930</a>: Comment out trappy references to example docs in elevate.xml files
+<br /><span class="attrib">(Erick Erickson)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9277">SOLR-9277</a>: Clean up some more remnants of supporting old and new style solr.xml in tests
+<br /><span class="attrib">(Erick Erickson)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9163">SOLR-9163</a>: Sync up basic_configs and data_driven_schema_configs, removing almost all differences
+except what is required for schemaless.
+<br /><span class="attrib">(yonik)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9340">SOLR-9340</a>: Change ZooKeeper disconnect and session expiry related logging from INFO to WARN to
+make debugging easier
+<br /><span class="attrib">(Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9358">SOLR-9358</a>: [AngularUI] In Cloud-&gt;Tree file view area, collapse metadata by default
+<br /><span class="attrib">(janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9256">SOLR-9256</a>: asserting hasNext() contract in JdbcDataSource in DataImportHandler
+<br /><span class="attrib">(Kristine Jetzke via Mikhai Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9209">SOLR-9209</a>: extracting JdbcDataSource.createResultSetIterator() for extension
+<br /><span class="attrib">(Kristine Jetzke via Mikhai Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9392">SOLR-9392</a>: Fixed CDCR Test failures which were due to leaked resources.
+<br /><span class="attrib">(shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9353">SOLR-9353</a>: Factor out ReRankQParserPlugin.ReRankQueryRescorer private class.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9385">SOLR-9385</a>: Add QParser.getParser(String,SolrQueryRequest) variant.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9367">SOLR-9367</a>: Improved TestInjection's randomization logic to use LuceneTestCase.random()
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9331">SOLR-9331</a>: Remove ReRankQuery's length constructor argument and member.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9092">SOLR-9092</a>: For the delete replica command we attempt to send the core admin delete request only
+if that node is actually up.
+<br /><span class="attrib">(Jessica Cheng Mallet, Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9410">SOLR-9410</a>: Make ReRankQParserPlugin's private ReRankWeight a public class of its own.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9404">SOLR-9404</a>: Refactor move/renames in JSON FacetProcessor and FacetFieldProcessor.
+<br /><span class="attrib">(David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9421">SOLR-9421</a>: Refactored out OverseerCollectionMessageHandler to smaller classes
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8643">SOLR-8643</a>: BlockJoinFacetComponent is substituted by BlockJoinFacetDocSetComponent. It doesn't need to change solrconfig.xml
+<br /><span class="attrib">(Mikhail Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8644">SOLR-8644</a>: Test asserts that block join facets work with parent level fq exclusions.
+<br /><span class="attrib">(Dr. Oleg Savrasov via Mikhail Khludnev)</span></li>
+    </ol>
+  </li>
+</ul>
+<h2><a id="v6.1.0" href="javascript:toggleList('v6.1.0')">Release 6.1.0  [2016-06-17]</a></h2>
+<ul id="v6.1.0.list">
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release.
+</li>
+  </li>
+  <li><a id="v6.1.0.versions_of_major_components" href="javascript:toggleList('v6.1.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
+    <ol id="v6.1.0.versions_of_major_components.list">
+      <li>Apache Tika 1.7
+</li>
+      <li>Carrot2 3.12.0
+</li>
+      <li>Velocity 1.7 and Velocity Tools 2.0
+</li>
+      <li>Apache UIMA 2.3.1
+</li>
+      <li>Apache ZooKeeper 3.4.6
+</li>
+      <li>Jetty 9.3.8.v20160314
+</li>
+    </ol>
+  </li>
+  <li><a id="v6.1.0.upgrading_from_solr_any_prior_release" href="javascript:toggleList('v6.1.0.upgrading_from_solr_any_prior_release')">Upgrading from Solr any prior release</a>&nbsp;&nbsp;&nbsp;(1)
+    <ol id="v6.1.0.upgrading_from_solr_any_prior_release.list">
+      <li>If you use historical dates, specifically on or before the year 1582, you should re-index.
+<p/>
+</li>
+    </ol>
+  </li>
+  <h3>Detailed Change List</h3>
+  <li><a id="v6.1.0.new_features" href="javascript:toggleList('v6.1.0.new_features')">New Features</a>&nbsp;&nbsp;&nbsp;(33)
     <ol id="v6.1.0.new_features.list">
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8782">SOLR-8782</a>: Add asynchronous sugar methods to the SolrJ Collections API.  You
 can now call .processAsync() to run a method asynchronously, or
@@ -225,7 +471,7 @@ To return the FeatureCollection as the root element, add '&amp;omitHeader=true"
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8859">SOLR-8859</a>: Spatial fields like RPT can now be configured to use Spatial4j registered shape formats
 e.g. via format="GeoJSON".
 <br /><span class="attrib">(ryan, David Smiley)</span></li>
-      <li><a href="http://issues.apache.org/jira/browse/SOLR-445">SOLR-445</a>: new ToleranteUpdateProcessorFactory to support skipping update commands that cause
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-445">SOLR-445</a>: new TolerantUpdateProcessorFactory to support skipping update commands that cause
 failures when sending multiple updates in a single request.
 <br /><span class="attrib">(Erick Erickson, Tomás Fernández Löbbe, Anshum Gupta, hossman)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8890">SOLR-8890</a>: New static method in DistributedUpdateProcessorFactory to allow UpdateProcessorFactories
@@ -289,6 +535,8 @@ Turn off with hl.highlightAlternate=false
 <br /><span class="attrib">(noble)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8610">SOLR-8610</a>: Resolve variables in encryptKeyFile of DIH's JdbcDataSource
 <br /><span class="attrib">(Kristine Jetzke via Mikhail Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-7739">SOLR-7739</a>: Add a new ClassificationUpdateProcessorFactory.
+<br /><span class="attrib">(Alessandro Benedetti via Tommaso Teofili)</span></li>
     </ol>
   </li>
   <li><a id="v6.1.0.bug_fixes" href="javascript:toggleList('v6.1.0.bug_fixes')">Bug Fixes</a>&nbsp;&nbsp;&nbsp;(18)
@@ -335,7 +583,7 @@ FCS, causing slowdowns
 <br /><span class="attrib">(Alessandro Benedetti, Jesse McLaughlin, Alan Woodward)</span></li>
     </ol>
   </li>
-  <li><a id="v6.1.0.optimizations" href="javascript:toggleList('v6.1.0.optimizations')">Optimizations</a>&nbsp;&nbsp;&nbsp;(10)
+  <li><a id="v6.1.0.optimizations" href="javascript:toggleList('v6.1.0.optimizations')">Optimizations</a>&nbsp;&nbsp;&nbsp;(11)
     <ol id="v6.1.0.optimizations.list">
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8722">SOLR-8722</a>: Don't force a full ZkStateReader refresh on every Overseer operation.
 <br /><span class="attrib">(Scott Blum via shalin)</span></li>
@@ -361,9 +609,11 @@ the lazy collection reference.
 <br /><span class="attrib">(Mikhail Khludnev)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8744">SOLR-8744</a>: Overseer operations performed with fine grained mutual exclusion
 <br /><span class="attrib">(noble, Scott Blum)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9204">SOLR-9204</a>: Improve performance of getting directory size with hdfs.
+<br /><span class="attrib">(Mark Miller)</span></li>
     </ol>
   </li>
-  <li><a id="v6.1.0.other_changes" href="javascript:toggleList('v6.1.0.other_changes')">Other Changes</a>&nbsp;&nbsp;&nbsp;(26)
+  <li><a id="v6.1.0.other_changes" href="javascript:toggleList('v6.1.0.other_changes')">Other Changes</a>&nbsp;&nbsp;&nbsp;(27)
     <ol id="v6.1.0.other_changes.list">
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8860">SOLR-8860</a>: Remove back-compat handling of router format made in <a href="http://issues.apache.org/jira/browse/SOLR-4221">SOLR-4221</a> in 4.5.0.
 <br /><span class="attrib">(shalin)</span></li>
@@ -423,10 +673,14 @@ works with Mockito
 <br /><span class="attrib">(Georg Sorst, Alan Woodward)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8445">SOLR-8445</a>: fix line separator in log4j.properties files
 <br /><span class="attrib">(Ahmet Arslan via Mikhail Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-2199">SOLR-2199</a>: DataImportHandler (DIH) JdbcDataSource supports multiple resultsets per query
+<br /><span class="attrib">(Kristine Jetzke, Mark Waddle via Mikhail Khludnev)</span></li>
     </ol>
   </li>
 </ul>
-<h2><a id="v6.0.1" href="javascript:toggleList('v6.0.1')">Release 6.0.1  [2016-05-28]</a></h2>
+<h2><a id="older" href="javascript:toggleList('older')">Older Releases</a></h2>
+<ul id="older.list">
+<h3><a id="v6.0.1" href="javascript:toggleList('v6.0.1')">Release 6.0.1  [2016-05-28]</a></h3>
 <ul id="v6.0.1.list">
   <li><a id="v6.0.1.upgrade_notes" href="javascript:toggleList('v6.0.1.upgrade_notes')">Upgrade Notes</a>&nbsp;&nbsp;&nbsp;(1)
     <ol id="v6.0.1.upgrade_notes.list">
@@ -530,11 +784,9 @@ Change SSLTestConfig to use a keystore file that is included as a resource in th
     </ol>
   </li>
 </ul>
-<h2><a id="older" href="javascript:toggleList('older')">Older Releases</a></h2>
-<ul id="older.list">
 <h3><a id="v6.0.0" href="javascript:toggleList('v6.0.0')">Release 6.0.0  [2016-04-08]</a></h3>
 <ul id="v6.0.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v6.0.0.versions_of_major_components" href="javascript:toggleList('v6.0.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -559,7 +811,7 @@ Change SSLTestConfig to use a keystore file that is included as a resource in th
 <br /><span class="attrib">(Ryan Ernst, Uwe Schindler)</span></li>
     </ol>
   </li>
-  <li><a id="v6.0.0.upgrading_from_solr_5.x" href="javascript:toggleList('v6.0.0.upgrading_from_solr_5.x')">Upgrading from Solr 5.x</a>&nbsp;&nbsp;&nbsp;(17)
+  <li><a id="v6.0.0.upgrading_from_solr_5.x" href="javascript:toggleList('v6.0.0.upgrading_from_solr_5.x')">Upgrading from Solr 5.x</a>&nbsp;&nbsp;&nbsp;(18)
     <ol id="v6.0.0.upgrading_from_solr_5.x.list">
       <li>The deprecated SolrServer and subclasses have been removed, use SolrClient
 instead.
@@ -636,6 +888,11 @@ now possible.  Parsing: It is now an error to supply a portion of the date out o
 </li>
       <li>SolrJ no longer includes DateUtil. If for some reason you need to format or parse dates, simply use Instant.format()
 and Instant.parse().
+<p/>
+</li>
+      <li>If you are using an RPT or other spatial field referencing Spatial4j in its configuration, then replace the string
+"com.spatial4j.core" with "org.locationtech.spatial4j".  Consider updating direct to Solr 6.2 which accepts the
+old value, albeit with a warning.
 <p/>
 </li>
     </ol>
@@ -982,9 +1239,123 @@ now parse (and format) dates with a leading '+' or '-' (BC dates or dates &gt; 4
     </ol>
   </li>
 </ul>
+<h3><a id="v5.5.2" href="javascript:toggleList('v5.5.2')">Release 5.5.2  [2016-06-25]</a></h3>
+<ul id="v5.5.2.list">
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release.
+</li>
+  </li>
+  <li><a id="v5.5.2.versions_of_major_components" href="javascript:toggleList('v5.5.2.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
+    <ol id="v5.5.2.versions_of_major_components.list">
+      <li>Apache Tika 1.7
+</li>
+      <li>Carrot2 3.10.4
+</li>
+      <li>Velocity 1.7 and Velocity Tools 2.0
+</li>
+      <li>Apache UIMA 2.3.1
+</li>
+      <li>Apache ZooKeeper 3.4.6
+</li>
+      <li>Jetty 9.2.13.v20150730
+</li>
+    </ol>
+  </li>
+  <li><a id="v5.5.2.bug_fixes" href="javascript:toggleList('v5.5.2.bug_fixes')">Bug Fixes</a>&nbsp;&nbsp;&nbsp;(27)
+    <ol id="v5.5.2.bug_fixes.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8695">SOLR-8695</a>: Ensure ZK watchers are not triggering our watch logic on connection events and
+make this handling more consistent.
+<br /><span class="attrib">(Scott Blum via Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9198">SOLR-9198</a>: config APIs unable to add multiple values with same name
+<br /><span class="attrib">(noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9191">SOLR-9191</a>: OverseerTaskQueue.peekTopN() fatally flawed
+<br /><span class="attrib">(Scott Blum, Noble Paul)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8812">SOLR-8812</a>: edismax: turn off mm processing if no explicit mm spec is provided
+and there are explicit operators (except for AND) - addresses problems caused by <a href="http://issues.apache.org/jira/browse/SOLR-2649">SOLR-2649</a>.
+<br /><span class="attrib">(Greg Pendlebury, Jan Høydahl, Erick Erickson, Steve Rowe)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9034">SOLR-9034</a>: Atomic updates failed to work when there were copyField targets that had docValues
+enabled.
+<br /><span class="attrib">(Karthik Ramachandran, Ishan Chattopadhyaya, yonik)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8940">SOLR-8940</a>: Fix group.sort option
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8857">SOLR-8857</a>: HdfsUpdateLog does not use configured or new default number of version buckets and is
+hard coded to 256.
+<br /><span class="attrib">(Mark Miller, yonik, Gregory Chanan)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8875">SOLR-8875</a>: SolrCloud Overseer clusterState could unexpectedly be null resulting in NPE.
+<br /><span class="attrib">(Scott Blum via David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8946">SOLR-8946</a>: bin/post failed to detect stdin usage on Ubuntu; maybe other unixes.
+<br /><span class="attrib">(David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9004">SOLR-9004</a>: Fix "name" field type definition in films example.
+<br /><span class="attrib">(Alexandre Rafalovitch via Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8990">SOLR-8990</a>: Fix top term links from schema browser page to use {!term} parser
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8971">SOLR-8971</a>: Preserve root cause when wrapping exceptions
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8792">SOLR-8792</a>: ZooKeeper ACL support fixed.
+<br /><span class="attrib">(Esther Quansah, Ishan Chattopadhyaya, Steve Rowe)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9030">SOLR-9030</a>: The 'downnode' overseer command can trip asserts in ZkStateWriter.
+<br /><span class="attrib">(Scott Blum, Mark Miller, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9036">SOLR-9036</a>: Solr slave is doing full replication (entire index) of index after master restart.
+<br /><span class="attrib">(Lior Sapir, Mark Miller, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9093">SOLR-9093</a>: Fix NullPointerException in TopGroupsShardResponseProcessor.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9118">SOLR-9118</a>: HashQParserPlugin should trim partition keys
+<br /><span class="attrib">(Joel Bernstein)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9117">SOLR-9117</a>: The first SolrCore is leaked after reload.
+<br /><span class="attrib">(Jessica Cheng Mallet via shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9116">SOLR-9116</a>: Race condition causing occasional SolrIndexSearcher leak when SolrCore is reloaded.
+<br /><span class="attrib">(Jessica Cheng Mallet via shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8801">SOLR-8801</a>: /bin/solr create script always returns exit code 0 when a collection/core already exists.
+<br /><span class="attrib">(Khalid Alharbi, Marius Grama via Steve Rowe)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9134">SOLR-9134</a>: Fix RestManager.addManagedResource return value.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9151">SOLR-9151</a>: Fix SolrCLI so that bin/solr -e cloud example can be run from any CWD
+<br /><span class="attrib">(janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9165">SOLR-9165</a>: Spellcheck does not return collations if "maxCollationTries" is used with "cursorMark".
+<br /><span class="attrib">(James Dyer)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8612">SOLR-8612</a>: closing JDBC Statement on failures in DataImportHandler (DIH)
+<br /><span class="attrib">(Kristine Jetzke via Mikhail Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8676">SOLR-8676</a>: keep LOG4J_CONFIG in solr.cmd
+<br /><span class="attrib">(Kristine Jetzke via Mikhail Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9176">SOLR-9176</a>: facet method ENUM was sometimes unnecessarily being rewritten to
+FCS, causing slowdowns
+<br /><span class="attrib">(Alessandro Benedetti, Jesse McLaughlin, Alan Woodward)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9234">SOLR-9234</a>: srcField works only when all fields are captured in the /update/json/docs
+endpoint
+<br /><span class="attrib">(noble)</span></li>
+    </ol>
+  </li>
+  <li><a id="v5.5.2.other_changes" href="javascript:toggleList('v5.5.2.other_changes')">Other Changes</a>&nbsp;&nbsp;&nbsp;(11)
+    <ol id="v5.5.2.other_changes.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-7516">SOLR-7516</a>: Improve javadocs for JavaBinCodec, ObjectResolver and enforce the single-usage policy.
+<br /><span class="attrib">(Jason Gerlowski, Benoit Vanalderweireldt, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8967">SOLR-8967</a>: In SolrCloud mode, under the 'Core Selector' dropdown in the UI the Replication tab won't be displayed
+anymore. The Replication tab is only beneficial to users running Solr in master-slave mode.
+<br /><span class="attrib">(Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9131">SOLR-9131</a>: Fix "start solr" text in cluster.vm Velocity template
+<br /><span class="attrib">(janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9053">SOLR-9053</a>: Upgrade commons-fileupload to 1.3.1, fixing a potential vulnerability
+<br /><span class="attrib">(Jeff Field, Mike Drob via janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8866">SOLR-8866</a>: UpdateLog will now throw an exception if it doesn't know how to serialize a value.
+<br /><span class="attrib">(David Smiley)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8933">SOLR-8933</a>: Solr should not close container streams.
+<br /><span class="attrib">(Mike Drob, Uwe Schindler, Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9037">SOLR-9037</a>: Replace multiple "/replication" strings with one static constant.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9047">SOLR-9047</a>: zkcli should allow alternative locations for log4j configuration
+<br /><span class="attrib">(Gregory Chanan)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9105">SOLR-9105</a>: Fix a bunch of typos across 103 files
+<br /><span class="attrib">(Bartosz Krasiński via janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8445">SOLR-8445</a>: fix line separator in log4j.properties files
+<br /><span class="attrib">(Ahmet Arslan via Mikhail Khludnev)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8674">SOLR-8674</a>: Stop ignoring sysprop solr.tests.mergePolicy, and make tests randomly choose between
+setting &lt;mergePolicy&gt; and &lt;mergePolicyFactory&gt;, which was added in <a href="http://issues.apache.org/jira/browse/SOLR-8621">SOLR-8621</a>.
+<br /><span class="attrib">(Christine Poerschke)</span></li>
+    </ol>
+  </li>
+</ul>
 <h3><a id="v5.5.1" href="javascript:toggleList('v5.5.1')">Release 5.5.1  [2016-05-05]</a></h3>
 <ul id="v5.5.1.list">
-  <li><a id="v5.5.1.bug_fixes" href="javascript:toggleList('v5.5.1.bug_fixes')">Bug Fixes</a>&nbsp;&nbsp;&nbsp;(7)
+  <li><a id="v5.5.1.bug_fixes" href="javascript:toggleList('v5.5.1.bug_fixes')">Bug Fixes</a>&nbsp;&nbsp;&nbsp;(42)
     <ol id="v5.5.1.bug_fixes.list">
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8737">SOLR-8737</a>: Managed synonym lists do not include the original term in the expand
 <br /><span class="attrib">(janhoy)</span></li>
@@ -999,21 +1370,120 @@ Jetzke, Shawn Heisey, Alan Woodward)</span></li>
 file if the file no longer exists (for example, if a commit happened and the IndexReader
 hasn't refreshed yet). In this case the reported size of the file is -1.
 <br /><span class="attrib">(Shai Erera, Alexey Serba, Richard Coggins)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8728">SOLR-8728</a>: ReplicaAssigner throws NPE when a partial list of nodes are only participating in replica
+placement. splitshard should preassign nodes using rules, if rules are present
+<br /><span class="attrib">(noble, Shai Erera)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8838">SOLR-8838</a>: Returning non-stored docValues is incorrect for negative floats and doubles.
+<br /><span class="attrib">(Ishan Chattopadhyaya, Steve Rowe)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8870">SOLR-8870</a>: AngularJS Query tab no longer URL-encodes the /select part of the request, fixing possible 404 issue
 when Solr is behind a proxy. Also, now supports old-style &amp;qt param when handler not prefixed with "/"
 <br /><span class="attrib">(janhoy)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8725">SOLR-8725</a>: Allow hyphen in collection, core, shard, and alias name as the non-first character
+(Anshum Gupta)
+<br /><span class="attrib">(from 6.0)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8155">SOLR-8155</a>: JSON Facet API - field faceting on a multi-valued string field without
+docValues (i.e. UnInvertedField implementation), but with a prefix or with a sort
+other than count, resulted in incorrect results.  This has been fixed, and facet.prefix
+support for facet.method=uif has been enabled.
+<br /><span class="attrib">(Mikhail Khludnev, yonik)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8835">SOLR-8835</a>: JSON Facet API: fix faceting exception on multi-valued numeric fields that
+have docValues.
+<br /><span class="attrib">(yonik)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-8908">SOLR-8908</a>: Fix to OnReconnect listener registration to allow listeners to deregister, such
 as when a core is reloaded or deleted to avoid a memory leak.
 <br /><span class="attrib">(Timothy Potter)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8662">SOLR-8662</a>: SchemaManager waits correctly for replicas to be notified of a new change
+<br /><span class="attrib">(sarowe, Noble Paul, Varun Thacker)</span></li>
       <li><a href="http://issues.apache.org/jira/browse/SOLR-9007">SOLR-9007</a>: Remove mention of the managed_schema_configs as valid config directory when creating
 the collection for the SolrCloud example.
 <br /><span class="attrib">(Timothy Potter)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8983">SOLR-8983</a>: Cleanup clusterstate and replicas for a failed create collection request
+<br /><span class="attrib">(Varun Thacker, Anshum Gupta)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8578">SOLR-8578</a>: Successful or not, requests are not always fully consumed by Solrj clients and we
+count on HttpClient or the JVM.
+<br /><span class="attrib">(Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8683">SOLR-8683</a>: Always consume the full request on the server, not just in the case of an error.
+<br /><span class="attrib">(Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8701">SOLR-8701</a>: CloudSolrClient decides that there are no healthy nodes to handle a request too early.
+<br /><span class="attrib">(Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8416">SOLR-8416</a>: The collections create API should return after all replicas are active.
+<br /><span class="attrib">(Michael Sun, Mark Miller, Alexey Serba)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8914">SOLR-8914</a>: ZkStateReader's refreshLiveNodes(Watcher) is not thread safe.
+<br /><span class="attrib">(Scott Blum, hoss,
+sarowe, Erick Erickson, Mark Miller, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8973">SOLR-8973</a>: Zookeeper frenzy when a core is first created.
+<br /><span class="attrib">(Janmejay Singh, Scott Blum, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8694">SOLR-8694</a>: DistributedMap/Queue can create too many Watchers and some code simplification.
+<br /><span class="attrib">(Scott Blum via Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8633">SOLR-8633</a>: DistributedUpdateProcess processCommit/deleteByQuery call finish on DUP and
+SolrCmdDistributor, which violates the lifecycle and can cause bugs.
+<br /><span class="attrib">(hossman via Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8656">SOLR-8656</a>: PeerSync should use same nUpdates everywhere.
+<br /><span class="attrib">(Ramsey Haddad via Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8697">SOLR-8697</a>, <a href="http://issues.apache.org/jira/browse/SOLR-8837">SOLR-8837</a>: Scope ZK election nodes by session to prevent elections from interfering with each other
+and other small LeaderElector improvements.
+<br /><span class="attrib">(Scott Blum via Mark Miller, Alan
+Woodward)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8599">SOLR-8599</a>: After a failed connection during construction of SolrZkClient attempt to retry until a connection
+can be made.
+<br /><span class="attrib">(Keith Laban, Dennis Gove)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8420">SOLR-8420</a>: Fix long overflow in sumOfSquares for Date statistics.
+<br /><span class="attrib">(Tom Hill, Christine Poerschke,
+Tomás Fernández Löbbe)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8748">SOLR-8748</a>: OverseerTaskProcessor limits number of concurrent tasks to just 10 even though the thread pool
+size is 100. The limit has now been increased to 100.
+<br /><span class="attrib">(Scott Blum, shalin)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8375">SOLR-8375</a>: ReplicaAssigner rejects valid nodes
+<br /><span class="attrib">(Kelvin Tan, noble)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8738">SOLR-8738</a>: Fixed false success response when invalid deleteByQuery requests intially hit non-leader
+cloud nodes
+<br /><span class="attrib">(hossman)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8771">SOLR-8771</a>: Multi-threaded core shutdown creates executor per core.
+<br /><span class="attrib">(Mike Drob via Mark Miller)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8145">SOLR-8145</a>: Fix position of OOM killer script when starting Solr in the background
+<br /><span class="attrib">(Jurian Broertjes via
+Timothy Potter)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8769">SOLR-8769</a>: Fix document exclusion in mlt query parser in Cloud mode for schemas that have non-"id"
+unique field
+<br /><span class="attrib">(Erik Hatcher, Anshum Gupta)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8728">SOLR-8728</a>: ReplicaAssigner throws NPE when a partial list of nodes are only participating in replica
+placement. splitshard should preassign nodes using rules, if rules are present
+<br /><span class="attrib">(noble, Shai Erera)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8779">SOLR-8779</a>: Fix missing InterruptedException handling in ZkStateReader.java
+<br /><span class="attrib">(Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8449">SOLR-8449</a>: Fix the core restore functionality to allow restoring multiple times on the same core
+<br /><span class="attrib">(Johannes Brucher, Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8790">SOLR-8790</a>: Collections API responses contain node name in the core-level responses that are
+returned.
+<br /><span class="attrib">(Anshum Gupta)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8804">SOLR-8804</a>: Fix a race condition in the ClusterStatus API call whereby the call would fail when a concurrent delete
+collection api command was executed
+<br /><span class="attrib">(Alexey Serba, Varun Thacker)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9016">SOLR-9016</a>: Fix SolrIdentifierValidator to not allow empty identifiers.
+<br /><span class="attrib">(Shai Erera)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8886">SOLR-8886</a>: Fix TrieField.toObject(IndexableField) to work for field with docValues
+enabled.
+<br /><span class="attrib">(yonik)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8891">SOLR-8891</a>: Fix StrField.toObject and toExternal to work with docValue IndexableField
+instances.
+<br /><span class="attrib">(yonik)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8865">SOLR-8865</a>: Real-time get sometimes fails to retrieve stored fields from docValues.
+<br /><span class="attrib">(Ishan Chattopadhyaya, yonik)</span></li>
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-9046">SOLR-9046</a>: Fix solr.cmd that wrongly assumes Jetty will always listen on 0.0.0.0.
+<br /><span class="attrib">(Bram Van Dam, Uwe Schindler)</span></li>
+    </ol>
+  </li>
+  <li><a id="v5.5.1.other_changes" href="javascript:toggleList('v5.5.1.other_changes')">Other Changes</a>&nbsp;&nbsp;&nbsp;(1)
+    <ol id="v5.5.1.other_changes.list">
+      <li><a href="http://issues.apache.org/jira/browse/SOLR-8758">SOLR-8758</a>: Add a new SolrCloudTestCase class, using MiniSolrCloudCluster
+<br /><span class="attrib">(Alan
+Woodward)</span></li>
     </ol>
   </li>
 </ul>
 <h3><a id="v5.5.0" href="javascript:toggleList('v5.5.0')">Release 5.5.0  [2016-02-23]</a></h3>
 <ul id="v5.5.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v5.5.0.versions_of_major_components" href="javascript:toggleList('v5.5.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -1467,7 +1937,7 @@ Simple/CloudMLTQParser
 </ul>
 <h3><a id="v5.4.0" href="javascript:toggleList('v5.4.0')">Release 5.4.0  [2015-12-14]</a></h3>
 <ul id="v5.4.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v5.4.0.versions_of_major_components" href="javascript:toggleList('v5.4.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -1957,7 +2427,7 @@ results to be returned on subsequent requests.
 </ul>
 <h3><a id="v5.3.0" href="javascript:toggleList('v5.3.0')">Release 5.3.0  [2015-08-25]</a></h3>
 <ul id="v5.3.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v5.3.0.versions_of_major_components" href="javascript:toggleList('v5.3.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -2323,7 +2793,7 @@ bin/solr and bin\solr.cmd
 </ul>
 <h3><a id="v5.2.1" href="javascript:toggleList('v5.2.1')">Release 5.2.1  [2015-06-15]</a></h3>
 <ul id="v5.2.1.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v5.2.1.versions_of_major_components" href="javascript:toggleList('v5.2.1.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -2382,7 +2852,7 @@ functions in HttpSolrCall.
 </ul>
 <h3><a id="v5.2.0" href="javascript:toggleList('v5.2.0')">Release 5.2.0  [2015-06-07]</a></h3>
 <ul id="v5.2.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v5.2.0.versions_of_major_components" href="javascript:toggleList('v5.2.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -2806,7 +3276,7 @@ via Anshum Gupta)</span></li>
 </ul>
 <h3><a id="v5.1.0" href="javascript:toggleList('v5.1.0')">Release 5.1.0  [2015-04-14]</a></h3>
 <ul id="v5.1.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v5.1.0.versions_of_major_components" href="javascript:toggleList('v5.1.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(6)
@@ -3197,7 +3667,7 @@ to _text_
 </ul>
 <h3><a id="v5.0.0" href="javascript:toggleList('v5.0.0')">Release 5.0.0  [2015-02-20]</a></h3>
 <ul id="v5.0.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release.
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release.
 </li>
       <li>NOTE: Solr 5.0 only supports creating and removing SolrCloud collections through
       the collections API, unlike previous versions. While not using the
@@ -4216,7 +4686,7 @@ JAR yourself (version 4.2) and add it to contrib/extraction/lib folder:
 </ul>
 <h3><a id="v4.10.0" href="javascript:toggleList('v4.10.0')">Release 4.10.0  [2014-09-04]</a></h3>
 <ul id="v4.10.0.list">
-      <li>Consult the <a href="http://lucene.apache.org/core/6_1_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
+      <li>Consult the <a href="http://lucene.apache.org/core/6_2_0/changes/Changes.html">LUCENE_CHANGES.txt</a> file for additional, low level, changes in this release
 </li>
   </li>
   <li><a id="v4.10.0.versions_of_major_components" href="javascript:toggleList('v4.10.0.versions_of_major_components')">Versions of Major Components</a>&nbsp;&nbsp;&nbsp;(5)
