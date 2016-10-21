@@ -10,11 +10,11 @@ servers with a structured schema).
 
 This is a subclass of [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager). The suggested reading list for understanding this package, in order, is:
 
-* [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager)
-* [bbop-rest-response](https://github.com/berkeleybop/bbop-rest-response)
-* [golr-conf](https://github.com/berkeleybop/golr-conf)
-* this document
-* [bbop-response-golr](https://github.com/berkeleybop/bbop-response-golr)
+* [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager) (superclass of bbop-manager-golr)
+* [bbop-rest-response](https://github.com/berkeleybop/bbop-rest-response) (superclass of bbop-reponse-golr)
+* [golr-conf](https://github.com/berkeleybop/golr-conf) (configuration for bbop-manager-golr)
+* this document (subclass of bbop-rest-manager)
+* [bbop-response-golr](https://github.com/berkeleybop/bbop-response-golr) (subclass of bbop-rest-response)
 
 The bbop-mananger-golr is an object and API for making queries to, and
 getting responses from, a GOlr server. The API allows you to: change
