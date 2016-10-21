@@ -35,6 +35,8 @@ If using the callback mode, users can also "register" functions to run
 in various pre-set orders against various internal events, such as
 "prerun", "search", and "error".
 
+The non-error return type of manager calls is a [bbop-response-golr](https://github.com/berkeleybop/bbop-response-golr).
+
 For more detailed information, please see
 the [unit tests](https://github.com/berkeleybop/bbop-manager-golr/tree/master/tests).
 
