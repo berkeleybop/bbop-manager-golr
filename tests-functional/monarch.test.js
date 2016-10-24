@@ -76,4 +76,27 @@ describe('Functional tests for Monarch', function() {
     done();
   });
 
+
+  // Words order in search should match
+  it('issue Charcot-Marie order', function(done) {
+
+    //engine_to_use.debug(true);
+    engine_to_use.method('GET');
+    var manager = new golr_manager(golr_url, gconf, engine_to_use, 'sync');
+    manager.set_query("marie charcot");
+    manager.add_query_field("label_searchable");
+    manager.add_query_field("definition_searchable");
+    manager.include_highlighting(true);
+
+    var r = manager.search();
+    var docs = r.highlighted_documents();
+
+    console.log(docs);
+
+    assert.isAbove(docs.length, 1, 'got a least 1 doc: yes');
+    assert.include(docs[0].label_searchable[0], 'hilite', 'first result must have `hilite`');
+
+    done();
+  });
+
 });
