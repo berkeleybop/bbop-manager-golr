@@ -31,7 +31,7 @@
     "bbop-core": "0.0.5",
     "bbop-registry": "0.0.3",
     "bbop-rest-manager": "0.0.11",
-    "bbop-response-golr": "0.0.6",
+    "bbop-response-golr": "0.0.8",
     "domino": "1.0.19",
     "expand-home-dir": "0.0.2",
     "golr-conf": "0.0.3",
