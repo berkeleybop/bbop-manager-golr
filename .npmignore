@@ -1,0 +1,4 @@
+## Ignore trying to upload the "functional" tests that require the
+## very large Java payload.
+solr
+solr/*
