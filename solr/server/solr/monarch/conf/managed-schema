@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Solr managed schema - automatically generated - DO NOT EDIT -->
+<schema name="golr" version="6.2">
+  <uniqueKey>id</uniqueKey>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="integer" class="solr.TrieIntField" positionIncrementGap="0" sortMissingLast="true" precisionStep="0"/>
+  <fieldType name="long" class="solr.TrieLongField"/>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="tdates" class="solr.TrieDateField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="6"/>
+  <fieldType name="tdoubles" class="solr.TrieDoubleField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="8"/>
+  <fieldType name="text_searchable" class="solr.TextField" positionIncrementGap="100" sortMissingLast="true">
+    <analyzer type="index">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.EdgeNGramFilterFactory" maxGramSize="15" minGramSize="3"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="tlongs" class="solr.TrieLongField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="8"/>
+  <field name="_version_" type="long" multiValued="false" indexed="true" stored="true"/>
+  <field name="category" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="category_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="definition" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="definition_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="document_category" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="equivalent_curie" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="equivalent_curie_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="equivalent_iri" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="equivalent_iri_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+  <field name="id_searchable" type="text_searchable" multiValued="false" indexed="true" required="true" stored="true"/>
+  <field name="iri" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="iri_searchable" type="text_searchable" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="label" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="label_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="leaf" type="boolean" multiValued="false" indexed="true" required="false" stored="true"/>
+  <field name="synonym" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="synonym_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="taxon" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
+  <field name="taxon_searchable" type="text_searchable" multiValued="true" indexed="true" required="false" stored="true"/>
+  <copyField source="category" dest="category_searchable"/>
+  <copyField source="definition" dest="definition_searchable"/>
+  <copyField source="equivalent_curie" dest="equivalent_curie_searchable"/>
+  <copyField source="equivalent_iri" dest="equivalent_iri_searchable"/>
+  <copyField source="id" dest="id_searchable"/>
+  <copyField source="iri" dest="iri_searchable"/>
+  <copyField source="label" dest="label_searchable"/>
+  <copyField source="synonym" dest="synonym_searchable"/>
+  <copyField source="taxon" dest="taxon_searchable"/>
+</schema>

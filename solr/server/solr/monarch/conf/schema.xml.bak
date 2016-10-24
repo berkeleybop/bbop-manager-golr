@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<schema name="golr" version="6.2">
+  <types>
+    <!--Unsplit string for when text needs to be dealt with atomically.-->
+    <!--For example, faceted querying.-->
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true"></fieldType>
+    <!--Any string with spaces that needs to be treated for searching purposes.-->
+    <!--This will be automatically used in cases where "searchable: true" has been-->
+    <!--specified in the YAML.-->
+    <fieldType name="text_searchable" class="solr.TextField" positionIncrementGap="100" sortMissingLast="true">
+      <analyzer type="index">
+        <tokenizer class="solr.StandardTokenizerFactory"></tokenizer>
+        <filter class="solr.LowerCaseFilterFactory"></filter>
+        <filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="15"></filter>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"></tokenizer>
+        <filter class="solr.LowerCaseFilterFactory"></filter>
+      </analyzer>
+    </fieldType>
+    <fieldType name="integer" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0" sortMissingLast="true"></fieldType>
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"></fieldType>
+    <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"></fieldType>
+    <fieldType name="long" class="solr.TrieLongField"></fieldType>
+    <fieldType name="tdates" class="solr.TrieDateField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="6"></fieldType>
+    <fieldType name="tlongs" class="solr.TrieLongField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="8"></fieldType>
+    <fieldType name="tdoubles" class="solr.TrieDoubleField" positionIncrementGap="0" docValues="true" multiValued="true" precisionStep="8"></fieldType>
+  </types>
+  <fields>
+    <!-- A special static/fixed (by YAML conf file) field all documents have. -->
+    <field name="document_category" type="string" required="false" multiValued="false" indexed="true" stored="true"></field>
+    <!-- Required by Solr. -->
+    <field name="_version_" type="long" multiValued="false" indexed="true" stored="true"></field>
+    <!-- monarch_search: A unique identifier (CURIE if exists, or IRI as fallback). -->
+    <field name="id" type="string" required="true" multiValued="false" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of id.-->
+    <field name="id_searchable" type="text_searchable" required="true" multiValued="false" indexed="true" stored="true"></field>
+    <copyField source="id" dest="id_searchable"></copyField>
+    <!-- monarch_search: The IRI. -->
+    <field name="iri" type="string" required="false" multiValued="false" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of iri.-->
+    <field name="iri_searchable" type="text_searchable" required="false" multiValued="false" indexed="true" stored="true"></field>
+    <copyField source="iri" dest="iri_searchable"></copyField>
+    <!-- monarch_search: The labels. -->
+    <field name="label" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of label.-->
+    <field name="label_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="label" dest="label_searchable"></copyField>
+    <!-- monarch_search: The synonyms. -->
+    <field name="synonym" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of synonym.-->
+    <field name="synonym_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="synonym" dest="synonym_searchable"></copyField>
+    <!-- monarch_search: The definitions. -->
+    <field name="definition" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of definition.-->
+    <field name="definition_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="definition" dest="definition_searchable"></copyField>
+    <!-- monarch_search: The taxons. -->
+    <field name="taxon" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of taxon.-->
+    <field name="taxon_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="taxon" dest="taxon_searchable"></copyField>
+    <!-- monarch_search: The categories. -->
+    <field name="category" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of category.-->
+    <field name="category_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="category" dest="category_searchable"></copyField>
+    <!-- monarch_search: The equivalent IRIs. -->
+    <field name="equivalent_iri" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of equivalent_iri.-->
+    <field name="equivalent_iri_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="equivalent_iri" dest="equivalent_iri_searchable"></copyField>
+    <!-- monarch_search: The equivalent CURIE. -->
+    <field name="equivalent_curie" type="string" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <!--An easily searchable (TextField tokenized) version of equivalent_curie.-->
+    <field name="equivalent_curie_searchable" type="text_searchable" required="false" multiValued="true" indexed="true" stored="true"></field>
+    <copyField source="equivalent_curie" dest="equivalent_curie_searchable"></copyField>
+    <!-- monarch_search: Is leaf node? -->
+    <field name="leaf" type="boolean" required="false" multiValued="false" indexed="true" stored="true"></field>
+  </fields>
+  <uniqueKey>id</uniqueKey>
+</schema>

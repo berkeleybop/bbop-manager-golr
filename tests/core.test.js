@@ -1169,6 +1169,7 @@ describe('15', function(){
 				  'json.nl=arrarr',
 				  'facet.limit=25',
 				  'hl=true',
+				  'hl.snippets=1000',
 				  'hl.simple.pre=%3Cem%20class=%22hilite%22%3E',
 				  'q=*:*'].join('&'),
 				 "hilite: simple turn on url"));
@@ -1207,6 +1208,7 @@ describe('15', function(){
  				  'json.nl=arrarr',
  				  'facet.limit=25',
  				  'hl=true',
+				  'hl.snippets=1000',
  				  'hl.simple.pre=%3Cem%20class=%22blah%22%3E',
  				  'q=*:*'].join('&'),
  				 "hilite: turn on url")); 
