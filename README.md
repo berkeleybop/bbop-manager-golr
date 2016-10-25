@@ -8,13 +8,8 @@ This package is a system for coherently and abstractly managing
 communication (callbacks, promises, etc.) with GOlr instances (Solr
 servers with a structured schema).
 
-This is a subclass of [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager). The suggested reading list for understanding this package, in order, is:
-
-* [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager) (superclass of bbop-manager-golr)
-* [bbop-rest-response](https://github.com/berkeleybop/bbop-rest-response) (superclass of bbop-reponse-golr)
-* [golr-conf](https://github.com/berkeleybop/golr-conf) (configuration for bbop-manager-golr)
-* this document (subclass of bbop-rest-manager)
-* [bbop-response-golr](https://github.com/berkeleybop/bbop-response-golr) (subclass of bbop-rest-response)
+To see how this all works in practice, maybe start with the
+[quickstart guide](#quickstart).
 
 The bbop-mananger-golr is an object and API for making queries to, and
 getting responses from, a GOlr server. The API allows you to: change
@@ -37,8 +32,20 @@ in various pre-set orders against various internal events, such as
 
 The non-error return type of manager calls is a [bbop-response-golr](https://github.com/berkeleybop/bbop-response-golr).
 
+This is a subclass of [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager). The suggested reading list for understanding this package, in order, is:
+
+* [bbop-rest-manager](https://github.com/berkeleybop/bbop-rest-manager) (superclass of bbop-manager-golr)
+* [bbop-rest-response](https://github.com/berkeleybop/bbop-rest-response) (superclass of bbop-reponse-golr)
+* [golr-conf](https://github.com/berkeleybop/golr-conf) (configuration for bbop-manager-golr)
+* this document (subclass of bbop-rest-manager)
+* [bbop-response-golr](https://github.com/berkeleybop/bbop-response-golr) (subclass of bbop-rest-response)
+
 For more detailed information, please see
 the [unit tests](https://github.com/berkeleybop/bbop-manager-golr/tree/master/tests).
+
+## Quickstart
+
+TODO
 
 ## Documentation
 
