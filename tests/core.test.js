@@ -157,7 +157,7 @@ describe('golr manager - 3', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -175,8 +175,8 @@ describe('golr manager - 3', function(){
 				  'facet.field=annotation_extension_class_closure_label',
 				  'fq=document_category:%22annotation%22',
 				  'fq=-document_category:%22ontology_class%22',
-				  'fq=isa_partof_closure:%22GO:0022008%22',
-				  'q=*:*',
+				  'fq=isa_partof_closure:%22GO%3A0022008%22',
+				  'q=*%3A*',
 				  'foo=bar'].join('&'),
       				 "looks like the real thing"));
     });
@@ -345,7 +345,7 @@ describe('golr manager - 6', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -361,7 +361,7 @@ describe('golr manager - 6', function(){
 				  'facet.field=annotation_class_label',
 				  'facet.field=regulates_closure_label',
 				  'facet.field=annotation_extension_class_closure_label',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
       				 "paging looks okay before"));
 	gm_ann.page(7, 11);
 	assert.isTrue(_link_comp(gm_ann.get_query_url(),
@@ -371,7 +371,7 @@ describe('golr manager - 6', function(){
 				  'wt=json',
 				  'rows=7',
 				  'start=11',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -387,7 +387,7 @@ describe('golr manager - 6', function(){
 				  'facet.field=annotation_class_label',
 				  'facet.field=regulates_closure_label',
 				  'facet.field=annotation_extension_class_closure_label',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
       				 "paging looks okay after"));
 	gm_ann.search();
 	assert.isTrue(_link_comp(gm_ann.get_query_url(),
@@ -397,7 +397,7 @@ describe('golr manager - 6', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -413,7 +413,7 @@ describe('golr manager - 6', function(){
 				  'facet.field=annotation_class_label',
 				  'facet.field=regulates_closure_label',
 				  'facet.field=annotation_extension_class_closure_label',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
       				 "paging resets properly"));
     });
 });
@@ -436,7 +436,7 @@ describe('golr manager - 7', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -454,7 +454,7 @@ describe('golr manager - 7', function(){
 				  'facet.field=annotation_extension_class_closure_label',
 				  'fq=-document_category:%22annotation%22',
 				  'fq=-document_category:%22ontology_class%22',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
       				 "looks like a correct double negative filter"));
     });
 });
@@ -493,7 +493,7 @@ describe('golr manager - 8b', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -509,7 +509,7 @@ describe('golr manager - 8b', function(){
 				  'facet.field=annotation_class_label',
 				  'facet.field=regulates_closure_label',
 				  'facet.field=annotation_extension_class_closure_label',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
 				 "default query"));
 
 	// Try simply setting to foo.
@@ -521,7 +521,7 @@ describe('golr manager - 8b', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -566,7 +566,7 @@ describe('golr manager - 8b', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
  				  'facet.sort=count',
@@ -582,7 +582,7 @@ describe('golr manager - 8b', function(){
  				  'facet.field=annotation_class_label',
  				  'facet.field=regulates_closure_label',
      				  'facet.field=annotation_extension_class_closure_label',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "base again"));
 
 	// Playing with default values.
@@ -596,7 +596,7 @@ describe('golr manager - 8b', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
  				  'facet.sort=count',
@@ -612,7 +612,7 @@ describe('golr manager - 8b', function(){
  				  'facet.field=annotation_class_label',
  				  'facet.field=regulates_closure_label',
      				  'facet.field=annotation_extension_class_closure_label',
-     				  'q=foo:bar',
+     				  'q=foo%3Abar',
      				  'qf=annotation_class%5E2',
      				  'qf=annotation_class_label_searchable%5E1',
      				  'qf=bioentity%5E2',
@@ -640,7 +640,7 @@ describe('golr manager - 8b', function(){
  				  'wt=json',
  				  'rows=10',
  				  'start=0',
- 				  'fl=*,score',
+ 				  'fl=*%2Cscore',
  				  'facet=true',
  				  'facet.mincount=1',
  				  'facet.sort=count',
@@ -656,7 +656,7 @@ describe('golr manager - 8b', function(){
  				  'facet.field=annotation_class_label',
  				  'facet.field=regulates_closure_label',
  				  'facet.field=annotation_extension_class_closure_label',
- 				  'q=*:*'].join('&'),
+ 				  'q=*%3A*'].join('&'),
  				 "base again again"));
 
     });
@@ -691,7 +691,7 @@ describe('golr manager - 10', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -708,7 +708,7 @@ describe('golr manager - 10', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -729,7 +729,7 @@ describe('golr manager - 10', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -758,7 +758,7 @@ describe('golr manager - 10', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -958,7 +958,7 @@ describe('bbop-manager-golr - 13', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1006,7 +1006,7 @@ describe('bbop-manager-golr - 13', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1061,14 +1061,14 @@ describe('bbop-manager-golr - 14', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
 				  'json.nl=arrarr',
 				  'facet.limit=25',
 				  'foo=bar',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
 				 "unset: set foo"));    
 
 	var c1 = gm.unset('foo');
@@ -1080,13 +1080,13 @@ describe('bbop-manager-golr - 14', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
 				  'json.nl=arrarr',
 				  'facet.limit=25',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
 				 "unset: unset foo"));    
 
 	var c2 = gm.unset('foo');
@@ -1098,13 +1098,13 @@ describe('bbop-manager-golr - 14', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
 				  'json.nl=arrarr',
 				  'facet.limit=25',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
 				 "unset: unset foo"));
     });
 });
@@ -1126,13 +1126,13 @@ describe('15', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
 				  'json.nl=arrarr',
 				  'facet.limit=25',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
 				 "hilite: unset false url"));
 
 	var c2 = gm.include_highlighting();
@@ -1144,13 +1144,13 @@ describe('15', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
 				  'json.nl=arrarr',
 				  'facet.limit=25',
-				  'q=*:*'].join('&'),
+				  'q=*%3A*'].join('&'),
 				 "hilite: current state nothing url"));
 
 	var c3 = gm.include_highlighting(true);
@@ -1162,7 +1162,7 @@ describe('15', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1170,8 +1170,8 @@ describe('15', function(){
 				  'facet.limit=25',
 				  'hl=true',
 				  'hl.snippets=1000',
-				  'hl.simple.pre=%3Cem%20class=%22hilite%22%3E',
-				  'q=*:*'].join('&'),
+				  'hl.simple.pre=%3Cem%20class%3D%22hilite%22%3E',
+				  'q=*%3A*'].join('&'),
 				 "hilite: simple turn on url"));
 
 	var c4 = gm.include_highlighting(false);
@@ -1183,13 +1183,13 @@ describe('15', function(){
  				  'wt=json',
  				  'rows=10',
  				  'start=0',
- 				  'fl=*,score',
+ 				  'fl=*%2Cscore',
  				  'facet=true',
  				  'facet.mincount=1',
  				  'facet.sort=count',
  				  'json.nl=arrarr',
  				  'facet.limit=25',
- 				  'q=*:*'].join('&'),
+ 				  'q=*%3A*'].join('&'),
  				 "hilite: simple turn off url"));
 
 	var c5 = gm.include_highlighting(true, '<em class="blah">');
@@ -1201,7 +1201,7 @@ describe('15', function(){
  				  'wt=json',
  				  'rows=10',
  				  'start=0',
- 				  'fl=*,score',
+ 				  'fl=*%2Cscore',
  				  'facet=true',
  				  'facet.mincount=1',
  				  'facet.sort=count',
@@ -1209,8 +1209,8 @@ describe('15', function(){
  				  'facet.limit=25',
  				  'hl=true',
 				  'hl.snippets=1000',
- 				  'hl.simple.pre=%3Cem%20class=%22blah%22%3E',
- 				  'q=*:*'].join('&'),
+ 				  'hl.simple.pre=%3Cem%20class%3D%22blah%22%3E',
+ 				  'q=*%3A*'].join('&'),
  				 "hilite: turn on url")); 
 
 	var c6 = gm.include_highlighting(false);
@@ -1222,13 +1222,13 @@ describe('15', function(){
  				  'wt=json',
  				  'rows=10',
  				  'start=0',
- 				  'fl=*,score',
+ 				  'fl=*%2Cscore',
  				  'facet=true',
  				  'facet.mincount=1',
  				  'facet.sort=count',
  				  'json.nl=arrarr',
  				  'facet.limit=25',
- 				  'q=*:*'].join('&'),
+ 				  'q=*%3A*'].join('&'),
  				 "hilite: turn off url"));
 
     });
@@ -1262,7 +1262,7 @@ describe('16', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-				  'fl=annotation_class,description,source,synonym,alternate_id,annotation_class_label,score,id',
+				  'fl=annotation_class%2Cdescription%2Csource%2Csynonym%2Calternate_id%2Cannotation_class_label%2Cscore%2Cid',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1272,7 +1272,7 @@ describe('16', function(){
 				  'facet.field=subset',
 				  'facet.field=regulates_closure_label',
 				  'facet.field=is_obsolete',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "liteness on for ontology on"));
 
 	// Toggle.
@@ -1285,7 +1285,7 @@ describe('16', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1295,7 +1295,7 @@ describe('16', function(){
  				  'facet.field=subset',
  				  'facet.field=regulates_closure_label',
  				  'facet.field=is_obsolete',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "liteness on for ontology off"));
 
     });
@@ -1324,13 +1324,13 @@ describe('17', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=5',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "limit: global to 5"));
 	assert.equal(gm.get_facet_limit(), 5, 'limit: limited to 5');
 	assert.equal(gm.get_facet_limit('foo'), null,
@@ -1351,14 +1351,14 @@ describe('17', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=10',
      				  'f.foo.facet.limit=1',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "limit: global to 10, foo to 1"));
 	assert.equal(gm.get_facet_limit(), 10, 'limit: limited to 10');
 	assert.equal(gm.get_facet_limit('foo'), 1, 'limit: foo to 1');
@@ -1381,13 +1381,13 @@ describe('17', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=25',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "limit: all back to normal"));
     });
 });
@@ -1404,7 +1404,7 @@ describe('download - 18', function(){
 	// We should round trip back to where we came from.
 	var start_url = gm.get_query_url();
 	var dl_url = gm.get_download_url(['foo', 'bar']);
-	var end_url = gm.get_query_url();     
+	var end_url = gm.get_query_url();
 	assert.isTrue(_link_comp(start_url, end_url, "dl 1: start and end at same place"));
 	assert.isTrue(_link_comp(dl_url,
      				 ['http://golr.berkeleybop.org/select?defType=edismax',
@@ -1413,7 +1413,7 @@ describe('download - 18', function(){
      				  'wt=csv',
      				  'rows=1000',
      				  'start=0',
-     				  'fl=foo,bar',
+     				  'fl=foo%2Cbar',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1423,7 +1423,7 @@ describe('download - 18', function(){
 				  'csv.separator=%09',
 				  'csv.header=false',
 				  'csv.mv.separator=%7C',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "dl 1: proper url"));
 	
     });
@@ -1450,7 +1450,7 @@ describe('download - 18', function(){
      				  'wt=csv',
      				  'rows=1000',
      				  'start=0',
-     				  'fl=foo,bar',
+     				  'fl=foo%2Cbar',
      				  'facet=true',
      				  'facet.mincount=1',
      				  'facet.sort=count',
@@ -1501,7 +1501,7 @@ describe('download - 18', function(){
      				  'wt=csv',
      				  'rows=1000',
      				  'start=0',
-     				  'fl=id1,id2',
+     				  'fl=id1%2Cid2',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1518,7 +1518,7 @@ describe('download - 18', function(){
  				  'facet.field=subset',
  				  'facet.field=regulates_closure_label',
  				  'facet.field=is_obsolete',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "dl 3: proper url"));
 
 	assert.equal(3, gm.get_query_filters().length,
@@ -1550,7 +1550,7 @@ describe('21', function(){
      				  'wt=csv',
      				  'rows=1000',
      				  'start=0',
-     				  'fl=foo,bar',
+     				  'fl=foo%2Cbar',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1600,13 +1600,13 @@ describe('22', function(){
      				  'wt=json',
      				  'rows=25',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=25',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "count: global to 25 in URL"));
 	assert.equal(gm.get_results_count(), 25, 'count: shifted to 25');
 	assert.equal(gm.reset_results_count(), 10, 'count: and back down');
@@ -1617,13 +1617,13 @@ describe('22', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=25',
-     				  'q=*:*'].join('&'),
+     				  'q=*%3A*'].join('&'),
      				 "count: return global to 10 in URL"));
 	
     });
@@ -1648,13 +1648,13 @@ describe('23', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=25',
-     				  'q=id:%22MGI:MGI:1%22'].join('&'),
+     				  'q=id%3A%22MGI%3AMGI%3A1%22'].join('&'),
      				 "set_id: just fine"));
 	
 	// set_ids
@@ -1666,13 +1666,13 @@ describe('23', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=25',
-     				  'q=id:(%22MGI:MGI:1%22%20OR%20%22MGI:MGI:2%22)'].join('&'),
+     				  'q=id%3A(%22MGI%3AMGI%3A1%22%20OR%20%22MGI%3AMGI%3A2%22)'].join('&'),
      				 "set_ids: just fine"));
 
     });
@@ -1697,7 +1697,7 @@ describe('24', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1715,15 +1715,15 @@ describe('24', function(){
 				  'facet.field=annotation_extension_class_closure_label',
 				  'fq=document_category:%22annotation%22',
 				  'fq=document_category:%22ontology_class%22',
-				  'fq=-isa_partof_closure:%22GO:0022008%22',
-				  'q=*:*'].join('&'),
+				  'fq=-isa_partof_closure:%22GO%3A0022008%22',
+				  'q=*%3A*'].join('&'),
       				 "added query filters as strings"));
 
 	assert.isTrue(_link_comp('/?' + gm_ann.get_filter_query_string(),
-				 ['/?q=*:*',
+				 ['/?q=*%3A*',
 				  'fq=document_category:%22ontology_class%22',
 				  'sfq=document_category:%22annotation%22',
-				  'sfq=-isa_partof_closure:%22GO:0022008%22'].join('&'),
+				  'sfq=-isa_partof_closure:%22GO%3A0022008%22'].join('&'),
 				 "reads out as RESTy bookmark"));
 	
     });
@@ -1745,7 +1745,7 @@ describe('24', function(){
 				  'wt=json',
 				  'rows=10',
 				  'start=0',
-				  'fl=*,score',
+				  'fl=*%2Cscore',
 				  'facet=true',
 				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1763,15 +1763,15 @@ describe('24', function(){
 				  'facet.field=annotation_extension_class_closure_label',
 				  'fq=document_category:%22annotation%22',
 				  'fq=document_category:%22ontology_class%22',
-				  'fq=-isa_partof_closure:%22GO:0022008%22',
-				  'q=*:*'].join('&'),
+				  'fq=-isa_partof_closure:%22GO%3A0022008%22',
+				  'q=*%3A*'].join('&'),
       				 "added query filters as strings"));
 
 	assert.isTrue(_link_comp('/?' + gm_ann.get_filter_query_string(),
-				 ['/?q=*:*',
+				 ['/?q=*%3A*',
 				  'fq=document_category:%22ontology_class%22',
 				  'sfq=document_category:%22annotation%22',
-				  'sfq=-isa_partof_closure:%22GO:0022008%22'].join('&'),
+				  'sfq=-isa_partof_closure:%22GO%3A0022008%22'].join('&'),
 				 "reads out as RESTy bookmark"));
 	
     });
@@ -1797,13 +1797,13 @@ describe('25', function(){
      				  'wt=json',
      				  'rows=10',
      				  'start=0',
-     				  'fl=*,score',
+     				  'fl=*%2Cscore',
      				  'facet=true',
      				  'facet.mincount=1',
      				  'facet.sort=count',
      				  'json.nl=arrarr',
      				  'facet.limit=25',
-     				  'q=f1:(%22id1%22%20OR%20%22id2%22)%20OR%20f2:(%22id1%22%20OR%20%22id2%22)'].join('&'),
+     				  'q=f1%3A(%22id1%22%20OR%20%22id2%22)%20OR%20f2%3A(%22id1%22%20OR%20%22id2%22)'].join('&'),
      				 "set_targets: 2x2"));
 
     });
@@ -1828,7 +1828,7 @@ describe('playing with get_download_url', function(){
      				  'wt=csv',
      				  'rows=1000',
      				  'start=0',
-     				  'fl=foo,bar',
+     				  'fl=foo%2Cbar',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
@@ -1865,7 +1865,7 @@ describe('playing with get_download_url', function(){
      				  'wt=csv',
      				  'rows=1000',
      				  'start=0',
-     				  'fl=foo,bar',
+     				  'fl=foo%2Cbar',
      				  'facet=true',
      				  'facet.mincount=1',
 				  'facet.sort=count',
